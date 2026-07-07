@@ -1,0 +1,107 @@
+.footer {
+  background-color: var(--surface);
+  border-top: 1px solid var(--border-dark);
+  padding: 4rem 0 2rem;
+  margin-top: 4rem;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.brandInfo {
+  max-width: 400px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.logoIcon {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.logoText {
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+
+.linksGrid {
+  display: flex;
+  gap: 4rem;
+}
+
+.linkGroup h4 {
+  color: #fff;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.linkGroup ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.linkGroup a {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.linkGroup a:hover {
+  color: var(--secondary);
+}
+
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.socials {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.socials a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.socials a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .linksGrid {
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}

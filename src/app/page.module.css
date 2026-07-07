@@ -1,0 +1,70 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.promoBanner {
+  width: 100%;
+  border-radius: 16px;
+  background: linear-gradient(rgba(11, 15, 26, 0.4), rgba(11, 15, 26, 0.8)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+  padding: 4rem 3rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-dark);
+}
+
+.promoContent {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.promoContent h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+.promoContent p {
+  color: var(--secondary);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid4 {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+  .promoBanner {
+    padding: 2rem 1.5rem;
+  }
+  .promoContent h3 {
+    font-size: 1.75rem;
+  }
+}
