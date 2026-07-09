@@ -3,11 +3,34 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import DownloadButton from '@/components/DownloadButton';
+import { getDriveFileSize } from '@/lib/drive';
+import ScreenshotsGallery from '@/components/ScreenshotsGallery';
 
 export default async function AppDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug || '';
   
+  // Common details for VN Video Editor / VN Editor
+  const vnEditorData = {
+    title: 'VN Video Editor Maker VlogNow',
+    developer: 'Ubiquiti Labs, LLC',
+    description: 'Best free HD video editor and video maker with all pro features.',
+    rating: '4.6',
+    reviews: '3M reviews',
+    downloads: '100M+',
+    iconUrl: '/Images/Video & Photo Editing/VN Editor/Vn Editor.png',
+    screenshots: [
+      '/Images/Video & Photo Editing/VN Editor/1.png',
+      '/Images/Video & Photo Editing/VN Editor/2.png',
+      '/Images/Video & Photo Editing/VN Editor/3.png',
+      '/Images/Video & Photo Editing/VN Editor/4.png',
+      '/Images/Video & Photo Editing/VN Editor/5.png',
+      '/Images/Video & Photo Editing/VN Editor/6.png',
+      '/Images/Video & Photo Editing/VN Editor/7.png',
+      '/Images/Video & Photo Editing/VN Editor/8.png'
+    ]
+  };
+
   // App details mapping
   const appDataMap: Record<string, any> = {
     'capcut': {
@@ -17,7 +40,18 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.3',
       reviews: '12.8M reviews',
       downloads: '1B+',
-      iconUrl: '/Capcut.png'
+      iconUrl: '/Images/Video & Photo Editing/Capcut/Capcut.png',
+      googleDriveId: '1EgtZZA5JFYjFDsEeWSq21GNjjvTBtxe8',
+      screenshots: [
+        '/Images/Video & Photo Editing/Capcut/1.png',
+        '/Images/Video & Photo Editing/Capcut/2.png',
+        '/Images/Video & Photo Editing/Capcut/3.png',
+        '/Images/Video & Photo Editing/Capcut/4.png',
+        '/Images/Video & Photo Editing/Capcut/5.png',
+        '/Images/Video & Photo Editing/Capcut/6.png',
+        '/Images/Video & Photo Editing/Capcut/7.png',
+        '/Images/Video & Photo Editing/Capcut/8.png'
+      ]
     },
     'kinemaster': {
       title: 'KineMaster - Video Editor',
@@ -26,7 +60,18 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.7',
       reviews: '5M reviews',
       downloads: '100M+',
-      iconUrl: '/Kine Master.png'
+      iconUrl: '/Images/Video & Photo Editing/Kinemaster/Kine Master.png',
+      googleDriveId: '1iMSl7I4jbS2ylW117UPEbJ4FMJ9NderH',
+      screenshots: [
+        '/Images/Video & Photo Editing/Kinemaster/1.png',
+        '/Images/Video & Photo Editing/Kinemaster/2.png',
+        '/Images/Video & Photo Editing/Kinemaster/3.png',
+        '/Images/Video & Photo Editing/Kinemaster/4.png',
+        '/Images/Video & Photo Editing/Kinemaster/5.png',
+        '/Images/Video & Photo Editing/Kinemaster/6.png',
+        '/Images/Video & Photo Editing/Kinemaster/7.png',
+        '/Images/Video & Photo Editing/Kinemaster/8.png'
+      ]
     },
     'alight-motion': {
       title: 'Alight Motion',
@@ -35,16 +80,225 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.9',
       reviews: '8M reviews',
       downloads: '50M+',
-      iconUrl: '/Alight Motion.png'
+      iconUrl: '/Images/Video & Photo Editing/Alightmotion/Alight Motion.png',
+      screenshots: [
+        '/Images/Video & Photo Editing/Alightmotion/1.png',
+        '/Images/Video & Photo Editing/Alightmotion/2.png',
+        '/Images/Video & Photo Editing/Alightmotion/3.png',
+        '/Images/Video & Photo Editing/Alightmotion/4.png',
+        '/Images/Video & Photo Editing/Alightmotion/5.png',
+        '/Images/Video & Photo Editing/Alightmotion/6.png',
+        '/Images/Video & Photo Editing/Alightmotion/7.png',
+        '/Images/Video & Photo Editing/Alightmotion/8.png'
+      ]
     },
-    'vn-video-editor': {
-      title: 'VN Video Editor Maker VlogNow',
-      developer: 'Ubiquiti Labs, LLC',
-      description: 'Best free HD video editor and video maker with all pro features.',
+    'alightmotion': {
+      title: 'Alight Motion',
+      developer: 'Alight Creative, Inc.',
+      description: 'Be part of the movement! First pro motion graphics app for your smartphone.',
+      rating: '4.9',
+      reviews: '8M reviews',
+      downloads: '50M+',
+      iconUrl: '/Images/Video & Photo Editing/Alightmotion/Alight Motion.png',
+      screenshots: [
+        '/Images/Video & Photo Editing/Alightmotion/1.png',
+        '/Images/Video & Photo Editing/Alightmotion/2.png',
+        '/Images/Video & Photo Editing/Alightmotion/3.png',
+        '/Images/Video & Photo Editing/Alightmotion/4.png',
+        '/Images/Video & Photo Editing/Alightmotion/5.png',
+        '/Images/Video & Photo Editing/Alightmotion/6.png',
+        '/Images/Video & Photo Editing/Alightmotion/7.png',
+        '/Images/Video & Photo Editing/Alightmotion/8.png'
+      ]
+    },
+    'vn-video-editor': vnEditorData,
+    'vn-editor': vnEditorData,
+    'canva': {
+      title: 'Canva: Design, Photo & Video',
+      developer: 'Canva',
+      description: 'Canva is your free photo editor, video collage maker, and graphic design app. Create stunning social media posts, videos, cards, flyers, photo collages & more.',
+      rating: '4.8',
+      reviews: '14M reviews',
+      downloads: '500M+',
+      iconUrl: '/Images/Video & Photo Editing/Canva/Canva.png',
+      screenshots: [
+        '/Images/Video & Photo Editing/Canva/1.png',
+        '/Images/Video & Photo Editing/Canva/2.png',
+        '/Images/Video & Photo Editing/Canva/3.png',
+        '/Images/Video & Photo Editing/Canva/4.png',
+        '/Images/Video & Photo Editing/Canva/5.png',
+        '/Images/Video & Photo Editing/Canva/6.png',
+        '/Images/Video & Photo Editing/Canva/7.png',
+        '/Images/Video & Photo Editing/Canva/8.png'
+      ]
+    },
+    'inshot': {
+      title: 'InShot - Video Editor',
+      developer: 'InShot Video Editor',
+      description: 'Powerful all-in-one Video Editor and Video Maker with professional features. Add music, transition effects, text, emoji and filters, blur background and etc!',
+      rating: '4.8',
+      reviews: '18M reviews',
+      downloads: '500M+',
+      iconUrl: '/Images/Video & Photo Editing/Inshot/Inshot.png',
+      screenshots: [
+        '/Images/Video & Photo Editing/Inshot/1.png',
+        '/Images/Video & Photo Editing/Inshot/2.png',
+        '/Images/Video & Photo Editing/Inshot/3.png',
+        '/Images/Video & Photo Editing/Inshot/4.png',
+        '/Images/Video & Photo Editing/Inshot/5.png',
+        '/Images/Video & Photo Editing/Inshot/6.png',
+        '/Images/Video & Photo Editing/Inshot/7.png',
+        '/Images/Video & Photo Editing/Inshot/8.png',
+        '/Images/Video & Photo Editing/Inshot/9.png',
+        '/Images/Video & Photo Editing/Inshot/10.png',
+        '/Images/Video & Photo Editing/Inshot/11.png',
+        '/Images/Video & Photo Editing/Inshot/12.png',
+        '/Images/Video & Photo Editing/Inshot/13.png',
+        '/Images/Video & Photo Editing/Inshot/14.png',
+        '/Images/Video & Photo Editing/Inshot/15.png',
+        '/Images/Video & Photo Editing/Inshot/16.png',
+        '/Images/Video & Photo Editing/Inshot/17.png'
+      ]
+    },
+    'lightroom': {
+      title: 'Adobe Lightroom Video & Photo',
+      developer: 'Adobe',
+      description: 'Adobe Photoshop Lightroom is a free, powerful photo & video editor and camera app that empowers you to capture and edit stunning images.',
+      rating: '4.7',
+      reviews: '10M reviews',
+      downloads: '100M+',
+      iconUrl: '/Images/Video & Photo Editing/Lightroom/Lightroom.png',
+      screenshots: []
+    },
+    'picsart': {
+      title: 'Picsart AI Photo Video Editor',
+      developer: 'PicsArt, Inc.',
+      description: 'Join the Picsart community of over 150 million creators worldwide. With the Picsart AI photo editor and video editor, you can bring your creativity to life.',
+      rating: '4.5',
+      reviews: '11M reviews',
+      downloads: '1B+',
+      iconUrl: '/Images/Video & Photo Editing/Picsart/Picsart.png',
+      screenshots: [
+        '/Images/Video & Photo Editing/Picsart/1.png',
+        '/Images/Video & Photo Editing/Picsart/2.png',
+        '/Images/Video & Photo Editing/Picsart/3.png',
+        '/Images/Video & Photo Editing/Picsart/4.png',
+        '/Images/Video & Photo Editing/Picsart/5.png',
+        '/Images/Video & Photo Editing/Picsart/6.png',
+        '/Images/Video & Photo Editing/Picsart/7.png',
+        '/Images/Video & Photo Editing/Picsart/8.png'
+      ]
+    },
+    'remini': {
+      title: 'Remini - AI Photo Enhancer',
+      developer: 'Bending Spoons',
+      description: 'Turn your old, pixelated, blurred, or damaged pictures into high-definition photos with just one tap! Generate mind-blowing AI Avatars of yourself.',
       rating: '4.6',
       reviews: '3M reviews',
       downloads: '100M+',
-      iconUrl: '/Vn Editor.png'
+      iconUrl: '/Images/Video & Photo Editing/Remini/Remini.png',
+      screenshots: []
+    },
+    'snapseed': {
+      title: 'Snapseed',
+      developer: 'Google LLC',
+      description: 'Snapseed is a complete and professional photo editor developed by Google. It includes 29 Tools and Filters, including: Healing, Brush, Structure, HDR, Perspective.',
+      rating: '4.4',
+      reviews: '1.5M reviews',
+      downloads: '100M+',
+      iconUrl: '/Images/Video & Photo Editing/Snapseed/Snapseed.png',
+      screenshots: [
+        '/Images/Video & Photo Editing/Snapseed/1.png',
+        '/Images/Video & Photo Editing/Snapseed/2.png',
+        '/Images/Video & Photo Editing/Snapseed/3.png',
+        '/Images/Video & Photo Editing/Snapseed/4.png',
+        '/Images/Video & Photo Editing/Snapseed/5.png',
+        '/Images/Video & Photo Editing/Snapseed/6.png',
+        '/Images/Video & Photo Editing/Snapseed/7.png',
+        '/Images/Video & Photo Editing/Snapseed/8.png'
+      ]
+    },
+    'chatgpt': {
+      title: 'ChatGPT',
+      developer: 'OpenAI',
+      description: 'Get instant answers, find creative inspiration, learn something new. The official app from OpenAI is free and syncs your history across devices.',
+      rating: '4.8',
+      reviews: '12M reviews',
+      downloads: '100M+',
+      iconUrl: '/Images/Ai/ChatGPT/ChatGPT.png',
+      screenshots: [
+        '/Images/Ai/ChatGPT/1.png',
+        '/Images/Ai/ChatGPT/2.png',
+        '/Images/Ai/ChatGPT/3.png',
+        '/Images/Ai/ChatGPT/4.png',
+        '/Images/Ai/ChatGPT/5.png',
+        '/Images/Ai/ChatGPT/6.png',
+        '/Images/Ai/ChatGPT/7.png',
+        '/Images/Ai/ChatGPT/8.png',
+        '/Images/Ai/ChatGPT/9.png',
+        '/Images/Ai/ChatGPT/10.png',
+        '/Images/Ai/ChatGPT/11.png',
+        '/Images/Ai/ChatGPT/12.png',
+        '/Images/Ai/ChatGPT/13.png',
+        '/Images/Ai/ChatGPT/14.png',
+        '/Images/Ai/ChatGPT/15.png'
+      ]
+    },
+    'grok-ai': {
+      title: 'Grok AI',
+      developer: 'xAI',
+      description: 'Grok is an AI designed to answer questions with a bit of wit and has a rebellious streak. Grok has real-time knowledge of the world via x (formerly Twitter).',
+      rating: '4.6',
+      reviews: '500K reviews',
+      downloads: '10M+',
+      iconUrl: '/Images/Ai/Grok AI/Grok AI.png',
+      screenshots: [
+        '/Images/Ai/Grok AI/1.png',
+        '/Images/Ai/Grok AI/2.png',
+        '/Images/Ai/Grok AI/3.png',
+        '/Images/Ai/Grok AI/4.png',
+        '/Images/Ai/Grok AI/5.png',
+        '/Images/Ai/Grok AI/6.png',
+        '/Images/Ai/Grok AI/7.png'
+      ]
+    },
+    'microsoft-copilot': {
+      title: 'Microsoft Copilot',
+      developer: 'Microsoft Corporation',
+      description: 'Microsoft Copilot is a pioneering chat assistant powered by the latest OpenAI models, GPT-4 and DALL·E 3. Improve your productivity with AI!',
+      rating: '4.7',
+      reviews: '2.5M reviews',
+      downloads: '50M+',
+      iconUrl: '/Images/Ai/Microsoft Copilot/Microsoft Copilot.png',
+      screenshots: [
+        '/Images/Ai/Microsoft Copilot/1.png',
+        '/Images/Ai/Microsoft Copilot/2.png',
+        '/Images/Ai/Microsoft Copilot/3.png',
+        '/Images/Ai/Microsoft Copilot/4.png',
+        '/Images/Ai/Microsoft Copilot/5.png',
+        '/Images/Ai/Microsoft Copilot/6.png',
+        '/Images/Ai/Microsoft Copilot/7.png',
+        '/Images/Ai/Microsoft Copilot/8.png'
+      ]
+    },
+    'perplexity-ai': {
+      title: 'Perplexity - Ask Anything',
+      developer: 'Perplexity AI',
+      description: 'Perplexity is your AI-powered search engine. Get instant, conversational answers on any topic, complete with inline citations and sources.',
+      rating: '4.8',
+      reviews: '800K reviews',
+      downloads: '10M+',
+      iconUrl: '/Images/Ai/Perplexity AI/Perplexity AI.png',
+      screenshots: [
+        '/Images/Ai/Perplexity AI/1.png',
+        '/Images/Ai/Perplexity AI/2.png',
+        '/Images/Ai/Perplexity AI/3.png',
+        '/Images/Ai/Perplexity AI/4.png',
+        '/Images/Ai/Perplexity AI/5.png',
+        '/Images/Ai/Perplexity AI/6.png',
+        '/Images/Ai/Perplexity AI/7.png',
+        '/Images/Ai/Perplexity AI/8.png'
+      ]
     }
   };
 
@@ -55,8 +309,12 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
     rating: '4.5',
     reviews: '10K reviews',
     downloads: '1M+',
-    iconUrl: ''
+    iconUrl: '',
+    googleDriveId: undefined,
+    screenshots: []
   };
+
+  const fileSize = app.googleDriveId ? await getDriveFileSize(app.googleDriveId) : null;
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -108,6 +366,14 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
               <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#fff' }}>{app.downloads}</div>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Downloads</div>
             </div>
+            
+            {/* File Size */}
+            {fileSize && (
+              <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '2rem' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#fff' }}>{fileSize}</div>
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Size</div>
+              </div>
+            )}
           </div>
           
           {/* Interactive Install Button */}
@@ -115,33 +381,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
         </div>
         
         {/* Right Side: Screenshots Gallery */}
-        <div style={{ flex: '1 1 500px', display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '1rem', WebkitOverflowScrolling: 'touch' }}>
-          {[
-            { title: 'Video & Photo Magic', color: '#0ea5e9' },
-            { title: 'AutoCut', color: '#8b5cf6' },
-            { title: 'AI Translator', color: '#ec4899' }
-          ].map((feature, i) => (
-            <div key={i} style={{ 
-              minWidth: '240px', 
-              height: '480px', 
-              background: 'rgba(15, 23, 42, 0.6)', 
-              borderRadius: '16px', 
-              border: '1px solid rgba(255,255,255,0.05)', 
-              display: 'flex', 
-              flexDirection: 'column', 
-              overflow: 'hidden',
-              position: 'relative',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
-            }}>
-              <div style={{ padding: '1.5rem 1rem 0.5rem', textAlign: 'center', fontSize: '1rem', fontWeight: 'bold', color: '#fff', zIndex: 1 }}>
-                {feature.title}
-              </div>
-              <div style={{ flex: 1, position: 'relative', margin: '0.5rem 1rem 1rem', borderRadius: '12px', background: `linear-gradient(180deg, ${feature.color} 0%, rgba(0,0,0,0.5) 100%)`, overflow: 'hidden' }}>
-                 {/* Placeholder for future images */}
-              </div>
-            </div>
-          ))}
-        </div>
+        <ScreenshotsGallery screenshots={app.screenshots} title={app.title} />
       </div>
       
       <Footer />

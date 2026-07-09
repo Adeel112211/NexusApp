@@ -6,6 +6,7 @@ import CategoryCard from '@/components/CategoryCard';
 import ListRow from '@/components/ListRow';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
+import AppsCarousel from '@/components/AppsCarousel';
 
 export default function Home() {
   return (
@@ -17,12 +18,18 @@ export default function Home() {
       {/* Trending Now */}
       <section className="container animate-fade-up" style={{ marginBottom: '4rem' }}>
         <h2 className={styles.sectionTitle}>TRENDING NOW</h2>
-        <div className={styles.grid4}>
-          <AppCard title="Capcut" rating={4.8} iconUrl="/Capcut.png" isFree={true} />
-          <AppCard title="Kinemaster" rating={4.7} iconUrl="/Kine Master.png" isFree={true} />
-          <AppCard title="Alight Motion" rating={4.9} iconUrl="/Alight Motion.png" isFree={true} />
-          <AppCard title="VN Video Editor" rating={4.6} iconUrl="/Vn Editor.png" isFree={true} />
-        </div>
+        <AppsCarousel>
+          <AppCard title="Capcut" rating={4.8} iconUrl="/Images/Capcut/Capcut.png" isFree={true} />
+          <AppCard title="Kinemaster" rating={4.7} iconUrl="/Images/Kinemaster/Kine Master.png" isFree={true} />
+          <AppCard title="Alight Motion" rating={4.9} iconUrl="/Images/Alightmotion/Alight Motion.png" isFree={true} />
+          <AppCard title="VN Editor" rating={4.6} iconUrl="/Images/VN Editor/Vn Editor.png" isFree={true} />
+          <AppCard title="Canva" rating={4.8} iconUrl="/Images/Canva/Canva.png" isFree={true} />
+          <AppCard title="InShot" rating={4.8} iconUrl="/Images/Inshot/Inshot.png" isFree={true} />
+          <AppCard title="Lightroom" rating={4.7} iconUrl="/Images/Lightroom/Lightroom.png" isFree={true} />
+          <AppCard title="Picsart" rating={4.5} iconUrl="/Images/Picsart/Picsart.png" isFree={true} />
+          <AppCard title="Remini" rating={4.6} iconUrl="/Images/Remini/Remini.png" isFree={true} />
+          <AppCard title="Snapseed" rating={4.4} iconUrl="/Images/Snapseed/Snapseed.png" isFree={true} />
+        </AppsCarousel>
       </section>
 
       <div className="animate-fade-up delay-100">
