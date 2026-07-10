@@ -1,6 +1,33 @@
 'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function Hero() {
+export default function Hero({ 
+  searchQuery, 
+  setSearchQuery 
+}: { 
+  searchQuery?: string, 
+  setSearchQuery?: (val: string) => void 
+} = {}) {
+  const [localQuery, setLocalQuery] = useState('');
+  const router = useRouter();
+
+  const currentQuery = searchQuery !== undefined ? searchQuery : localQuery;
+  const setQuery = setSearchQuery || setLocalQuery;
+
+  const handleSearch = () => {
+    // If we're controlling state externally (on homepage), we don't need to navigate.
+    // The homepage will just show results automatically.
+    // If not controlled, we navigate.
+    if (!setSearchQuery) {
+      if (currentQuery.trim()) {
+        router.push(`/apps?q=${encodeURIComponent(currentQuery.trim())}`);
+      } else {
+        router.push('/apps');
+      }
+    }
+  };
+
   return (
     <section className="pb-8 md:pb-16 text-center" style={{ paddingTop: 'clamp(80px, 12vh, 120px)' }}>
       <div className="container flex flex-col items-center gap-6 md:gap-8">
@@ -49,9 +76,17 @@ export default function Hero() {
           <input
             type="text"
             placeholder="Search for Mods Apps..."
+            value={currentQuery}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
             className="flex-1 bg-transparent border-none outline-none text-[#F3F4F6] text-sm md:text-base min-w-0"
           />
           <button
+            onClick={handleSearch}
             onMouseEnter={e => {
               e.currentTarget.style.backgroundColor = '#4F46E5';
               e.currentTarget.style.transform = 'translateY(-2px)';
