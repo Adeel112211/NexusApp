@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import DownloadButton from '@/components/DownloadButton';
-import { getDriveFileSize } from '@/lib/drive';
+import { getDriveFileInfo } from '@/lib/drive';
 import ScreenshotsGallery from '@/components/ScreenshotsGallery';
 import AppsCarousel from '@/components/AppsCarousel';
 import AppCard from '@/components/AppCard';
@@ -21,6 +21,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
     reviews: '3M reviews',
     downloads: '100M+',
     iconUrl: '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/Vn%20Editor.png',
+    googleDriveId: '1Cbs9AmRjpbyg_3CBwNWGCGQbQlajZ9es',
     screenshots: [
       '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/1.png',
       '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/2.png',
@@ -63,7 +64,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '5M reviews',
       downloads: '100M+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Kinemaster/Kine%20Master.png',
-      googleDriveId: '1iMSl7I4jbS2ylW117UPEbJ4FMJ9NderH',
+      googleDriveId: '1YEOxe7nKgs7-Tj3U9iD05QJAHFmMDB0g',
       screenshots: [
         '/Images/Video%20%26%20Photo%20Editing/Kinemaster/1.png',
         '/Images/Video%20%26%20Photo%20Editing/Kinemaster/2.png',
@@ -83,6 +84,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '8M reviews',
       downloads: '50M+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png',
+      googleDriveId: '1v3XSDYiUADtSvASnsxJth8qBdsQWGwm1',
       screenshots: [
         '/Images/Video%20%26%20Photo%20Editing/Alightmotion/1.png',
         '/Images/Video%20%26%20Photo%20Editing/Alightmotion/2.png',
@@ -102,6 +104,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '8M reviews',
       downloads: '50M+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png',
+      googleDriveId: '1v3XSDYiUADtSvASnsxJth8qBdsQWGwm1',
       screenshots: [
         '/Images/Video%20%26%20Photo%20Editing/Alightmotion/1.png',
         '/Images/Video%20%26%20Photo%20Editing/Alightmotion/2.png',
@@ -142,6 +145,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '18M reviews',
       downloads: '500M+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Inshot/Inshot.png',
+      googleDriveId: '1z0wZ69tSZ8qTDCeP2NgHbWfZJKeqQW4_',
       screenshots: [
         '/Images/Video%20%26%20Photo%20Editing/Inshot/1.png',
         '/Images/Video%20%26%20Photo%20Editing/Inshot/2.png',
@@ -170,6 +174,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '10M reviews',
       downloads: '100M+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Lightroom/Lightroom.png',
+      googleDriveId: '13JpgO4s5rEEGPRlbk7FLAZ7aqBVBv2Ym',
       screenshots: []
     },
     'picsart': {
@@ -180,6 +185,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '11M reviews',
       downloads: '1B+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Picsart/Picsart.png',
+      googleDriveId: '14Yohr3wgU9xJusuFUDLX5yrVjVo_kWF5',
       screenshots: [
         '/Images/Video%20%26%20Photo%20Editing/Picsart/1.png',
         '/Images/Video%20%26%20Photo%20Editing/Picsart/2.png',
@@ -199,7 +205,17 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '3M reviews',
       downloads: '100M+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Remini/Remini.png',
-      screenshots: []
+      googleDriveId: '1UrIqa7WYXCbVhCHaWx4k2eAaEli7zEhs',
+      screenshots: [
+        '/Images/Video%20%26%20Photo%20Editing/Remini/1.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/2.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/3.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/4.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/5.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/6.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/7.webp',
+        '/Images/Video%20%26%20Photo%20Editing/Remini/8.webp'
+      ]
     },
     'snapseed': {
       title: 'Snapseed',
@@ -272,6 +288,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '2.5M reviews',
       downloads: '50M+',
       iconUrl: '/Images/Ai/Microsoft%20Copilot/Microsoft%20Copilot.png',
+      googleDriveId: '19QKfgW0E4_AQ6n3udi6HIRa-e1RBzSt1',
       screenshots: [
         '/Images/Ai/Microsoft%20Copilot/1.png',
         '/Images/Ai/Microsoft%20Copilot/2.png',
@@ -291,6 +308,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '800K reviews',
       downloads: '10M+',
       iconUrl: '/Images/Ai/Perplexity%20AI/Perplexity%20AI.png',
+      googleDriveId: '1Gi0l0HgYwNbZkSRljLfcaTu3jgxk43jf',
       screenshots: [
         '/Images/Ai/Perplexity%20AI/1.png',
         '/Images/Ai/Perplexity%20AI/2.png',
@@ -362,12 +380,25 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '10K reviews',
       downloads: '1M+',
       iconUrl: iconUrl,
-      googleDriveId: undefined,
+      googleDriveId: {
+        '8-ball-pool': '1-NfyjE93pZilJlB28lWqMUQlMMRXvLiJ',
+        'clash-of-clans': '1pJkryS8mrSaZYNbcCHzHi5mr5FaZIkZV',
+        'dream-league-soccer': '1oBJOTRtMLbzyfFqaBtsRgbes_TGvhja5',
+        'gta-san-andreas': '1hRpPqsYEcuvtS486xoVMwouuUXD0rucx',
+        'clash-royale': '13iHQ-MY8hA5m0iZD4B_JhCzKxFWSLNWm',
+        'car-parking-multiplayer': '1mdfX9Y_0GueY95rbhdmdbe9xfvRx3DT4',
+        'minecraft': '1sik4Sb97LPuRQ-TPnNZwI8T7NITJltH8',
+        'hill-climb-racing': '1w1k7lOjgdHsVlMXiYueO59N2kNWIa5nF',
+        'hill-climb-racing-2': '1U3qZ7NLbjUr3QaoS4-dU_hF3-Lpg7Zuv',
+        'roblox': '1TFC4Zla1fvyoyNxNlKOJBdEY8zLrnCmn'
+      }[slug as string] || undefined,
       screenshots: screenshots
     };
   }
 
-  const fileSize = app.googleDriveId ? await getDriveFileSize(app.googleDriveId) : null;
+  const fileInfo = app.googleDriveId ? await getDriveFileInfo(app.googleDriveId) : { size: null, version: null };
+  const fileSize = fileInfo.size;
+  const fileVersion = fileInfo.version;
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -440,24 +471,23 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
                 <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Downloads</div>
               </div>
               
-              {/* Divider */}
-              {fileSize && (
+              {/* Version */}
+              {fileVersion && (
                 <>
                   <div className="flex items-center justify-center">
                     <div className="app-stats-div" />
                   </div>
                   
-                  {/* Size */}
                   <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
-                    <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{fileSize}</div>
-                    <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Size</div>
+                    <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{fileVersion}</div>
+                    <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Version</div>
                   </div>
                 </>
               )}
             </div>
             
             {/* Interactive Install Button */}
-            <DownloadButton slug={slug} />
+            <DownloadButton slug={slug} fileSize={fileSize} />
           </div>
         </div>
         

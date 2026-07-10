@@ -1,5 +1,5 @@
-export async function getDriveFileSize(id: string): Promise<string | null> {
-  if (!id) return null;
+export async function getDriveFileInfo(id: string): Promise<{ size: string | null, version: string | null }> {
+  if (!id) return { size: null, version: null };
   try {
     const url = `https://drive.google.com/uc?export=download&id=${id}`;
     const res = await fetch(url, { next: { revalidate: 3600 } });
@@ -14,7 +14,7 @@ export async function getDriveFileSize(id: string): Promise<string | null> {
     } else if (confirmMatch) {
       finalUrl = `https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=${confirmMatch[1]}`;
     } else {
-      return null;
+      return { size: null, version: null };
     }
     
     const setCookie = res.headers.get('set-cookie');
@@ -25,17 +25,30 @@ export async function getDriveFileSize(id: string): Promise<string | null> {
       next: { revalidate: 3600 }
     });
     
+    let size = null;
     const contentLength = sizeRes.headers.get('content-length');
     if (contentLength) {
       const bytes = parseInt(contentLength, 10);
       if (bytes > 1024 * 1024 * 1024) {
-        return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
+        size = (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
+      } else {
+        size = (bytes / (1024 * 1024)).toFixed(1) + ' MB';
       }
-      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
     }
-    return null;
+
+    let version = null;
+    const contentDisposition = sizeRes.headers.get('content-disposition');
+    if (contentDisposition) {
+      // e.g. filename="capcut v18-5-0.apk"
+      const vMatch = contentDisposition.match(/v[\d\.\-]+/i);
+      if (vMatch) {
+        version = vMatch[0].replace(/-/g, '.').replace(/^v/i, '');
+      }
+    }
+    
+    return { size, version };
   } catch (err) {
-    console.error('Failed to get drive file size:', err);
-    return null;
+    console.error('Failed to get drive file info:', err);
+    return { size: null, version: null };
   }
 }

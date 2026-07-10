@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function DownloadButton({ slug }: { slug: string }) {
+export default function DownloadButton({ slug, fileSize }: { slug: string, fileSize?: string | null }) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -17,12 +17,43 @@ export default function DownloadButton({ slug }: { slug: string }) {
     if (slug === 'capcut') {
       googleDriveId = '1EgtZZA5JFYjFDsEeWSq21GNjjvTBtxe8';
     } else if (slug === 'kinemaster') {
-      googleDriveId = '1iMSl7I4jbS2ylW117UPEbJ4FMJ9NderH';
-    } else if (slug === 'vn-video-editor') {
-      // Direct link to the spreadsheet download
-      window.location.href = 'https://docs.google.com/spreadsheets/d/1uUr8pqrblr1YKJd48tqeQpiCFhMTBN7SifxQv4q6pDQ/export?format=xlsx';
-      setIsDownloading(false);
-      return;
+      googleDriveId = '1YEOxe7nKgs7-Tj3U9iD05QJAHFmMDB0g';
+    } else if (slug === 'alight-motion' || slug === 'alightmotion') {
+      googleDriveId = '1v3XSDYiUADtSvASnsxJth8qBdsQWGwm1';
+    } else if (slug === 'inshot') {
+      googleDriveId = '1z0wZ69tSZ8qTDCeP2NgHbWfZJKeqQW4_';
+    } else if (slug === 'lightroom') {
+      googleDriveId = '13JpgO4s5rEEGPRlbk7FLAZ7aqBVBv2Ym';
+    } else if (slug === 'vn-video-editor' || slug === 'vn-editor') {
+      googleDriveId = '1Cbs9AmRjpbyg_3CBwNWGCGQbQlajZ9es';
+    } else if (slug === 'remini') {
+      googleDriveId = '1UrIqa7WYXCbVhCHaWx4k2eAaEli7zEhs';
+    } else if (slug === 'picsart') {
+      googleDriveId = '14Yohr3wgU9xJusuFUDLX5yrVjVo_kWF5';
+    } else if (slug === 'perplexity-ai') {
+      googleDriveId = '1Gi0l0HgYwNbZkSRljLfcaTu3jgxk43jf';
+    } else if (slug === 'microsoft-copilot') {
+      googleDriveId = '19QKfgW0E4_AQ6n3udi6HIRa-e1RBzSt1';
+    } else if (slug === '8-ball-pool') {
+      googleDriveId = '1-NfyjE93pZilJlB28lWqMUQlMMRXvLiJ';
+    } else if (slug === 'clash-of-clans') {
+      googleDriveId = '1pJkryS8mrSaZYNbcCHzHi5mr5FaZIkZV';
+    } else if (slug === 'dream-league-soccer') {
+      googleDriveId = '1oBJOTRtMLbzyfFqaBtsRgbes_TGvhja5';
+    } else if (slug === 'gta-san-andreas') {
+      googleDriveId = '1hRpPqsYEcuvtS486xoVMwouuUXD0rucx';
+    } else if (slug === 'clash-royale') {
+      googleDriveId = '13iHQ-MY8hA5m0iZD4B_JhCzKxFWSLNWm';
+    } else if (slug === 'car-parking-multiplayer') {
+      googleDriveId = '1mdfX9Y_0GueY95rbhdmdbe9xfvRx3DT4';
+    } else if (slug === 'minecraft') {
+      googleDriveId = '1sik4Sb97LPuRQ-TPnNZwI8T7NITJltH8';
+    } else if (slug === 'hill-climb-racing') {
+      googleDriveId = '1w1k7lOjgdHsVlMXiYueO59N2kNWIa5nF';
+    } else if (slug === 'hill-climb-racing-2') {
+      googleDriveId = '1U3qZ7NLbjUr3QaoS4-dU_hF3-Lpg7Zuv';
+    } else if (slug === 'roblox') {
+      googleDriveId = '1TFC4Zla1fvyoyNxNlKOJBdEY8zLrnCmn';
     } else {
       alert('Download link not available for this app yet.');
       setIsDownloading(false);
@@ -137,7 +168,7 @@ export default function DownloadButton({ slug }: { slug: string }) {
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        DOWNLOAD
+        Download {fileSize && <span style={{ fontWeight: 400, opacity: 0.9 }}>({fileSize})</span>}
       </button>
 
       {/* Render popup at root level so parent animations don't trap it */}
