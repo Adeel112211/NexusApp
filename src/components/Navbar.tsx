@@ -13,9 +13,6 @@ export default function Navbar() {
       borderBottom: '1px solid rgba(255,255,255,0.08)',
     },
     inner: {
-      maxWidth: 1280,
-      margin: '0 auto',
-      padding: '0 2rem',
       height: 88,
       display: 'flex',
       alignItems: 'center',
@@ -30,18 +27,17 @@ export default function Navbar() {
       flexShrink: 0,
     },
     logoText: { fontSize: '1.45rem', fontWeight: 800, letterSpacing: '0.12em', color: '#fff' },
-    links: { display: 'flex', alignItems: 'center', gap: 8 },
   };
 
   return (
     <nav style={S.nav}>
-      <div style={S.inner}>
+      <div className="container" style={S.inner}>
         <Link href="/" style={S.logo}>
           <div style={S.hex} />
           <span style={S.logoText}>APPNEXUS</span>
         </Link>
 
-        <div style={S.links}>
+        <div className="hidden md:flex items-center gap-2">
           <Link 
             href="/" 
             onMouseEnter={e => e.currentTarget.style.color = '#22d3ee'}

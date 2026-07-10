@@ -45,8 +45,27 @@ button, input { font-family: inherit; }
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-download-btn {
+    font-size: 11px !important;
+    letter-spacing: normal !important;
+    padding: 8px 0 !important;
+    gap: 4px !important;
+  }
+  .mobile-download-btn svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
 }
 
 @keyframes fadeUp {

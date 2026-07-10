@@ -8,11 +8,11 @@ export default function Footer() {
 
   return (
     <footer style={{ backgroundColor: '#0d1017', borderTop: '1px solid rgba(255,255,255,0.07)', marginTop: '5rem' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '4rem 2rem 2rem' }}>
+      <div className="container mx-auto py-10 md:py-16">
         {/* Top */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 40, marginBottom: 48 }}>
+        <div className="flex flex-col md:flex-row justify-between flex-wrap gap-10 md:gap-14 mb-12">
           {/* Brand */}
-          <div style={{ maxWidth: 320 }}>
+          <div className="max-w-[320px]">
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16, textDecoration: 'none' }}>
               <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg,#06B6D4,#4F46E5)', clipPath: 'polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)', flexShrink: 0 }} />
               <span style={{ fontSize: '1rem', fontWeight: 800, letterSpacing: '0.12em', color: '#fff' }}>APPNEXUS</span>
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div style={{ display: 'flex', gap: 60, flexWrap: 'wrap' }}>
+          <div className="flex gap-12 md:gap-16 flex-wrap">
             <div style={colStyle}>
               <div style={headStyle}>CATEGORIES</div>
               {['All Apps', 'Games', 'Utilities', 'Social'].map(l => (

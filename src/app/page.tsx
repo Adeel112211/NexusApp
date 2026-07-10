@@ -10,7 +10,18 @@ import AppsCarousel from '@/components/AppsCarousel';
 /* ─── Consistent section heading ──────────────────────── */
 function SectionHead({ title }: { title: string }) {
   return (
-    <h2 style={{ fontSize: '0.9rem', fontWeight: 800, letterSpacing: '0.12em', color: '#F3F4F6', marginBottom: 24, textTransform: 'uppercase' as const }}>
+    <h2 
+      style={{ 
+        fontSize: '1.75rem', 
+        fontWeight: 800, 
+        letterSpacing: '0.05em', 
+        background: 'linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        textShadow: '0px 2px 10px rgba(255,255,255,0.05)',
+        marginBottom: 0
+      }}
+    >
       {title}
     </h2>
   );
@@ -89,9 +100,9 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* ── Trending Now ──────────────────────────────── */}
-      <section className="container animate-fade-up" style={{ marginTop: 8, marginBottom: '4rem' }}>
-        <SectionHead title="Trending Now" />
+      {/* ── Video & Photo Editors ─────────────────────── */}
+      <section className="container animate-fade-up" style={{ marginTop: '3.5rem', marginBottom: '4rem' }}>
+        <SectionHead title="VIDEO & PHOTO EDITORS" />
         <AppsCarousel>
           {TRENDING_APPS.map(app => <AppCard key={app.title} {...app} />)}
         </AppsCarousel>
@@ -104,7 +115,7 @@ export default function Home() {
 
       {/* ── AI Tools ──────────────────────────────────── */}
       <section className="container animate-fade-up delay-200" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
-        <SectionHead title="AI Tools" />
+        <SectionHead title="AI TOOLS" />
         <AppsCarousel>
           {AI_TOOLS.map(app => <AppCard key={app.title} {...app} />)}
         </AppsCarousel>
@@ -112,7 +123,7 @@ export default function Home() {
 
       {/* ── Games ───────────────────────────────────────── */}
       <section className="container animate-fade-up delay-300" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
-        <SectionHead title="Top Games" />
+        <SectionHead title="GAMES" />
         <AppsCarousel>
           {GAMES.map(app => <AppCard key={app.title} {...app} />)}
         </AppsCarousel>
@@ -120,7 +131,7 @@ export default function Home() {
 
       {/* ── Music ───────────────────────────────────────── */}
       <section className="container animate-fade-up delay-400" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
-        <SectionHead title="Music & Audio" />
+        <SectionHead title="MUSIC & AUDIO" />
         <AppsCarousel>
           {MUSIC.map(app => <AppCard key={app.title} {...app} />)}
         </AppsCarousel>
@@ -128,7 +139,7 @@ export default function Home() {
 
       {/* ── VPN ─────────────────────────────────────────── */}
       <section className="container animate-fade-up delay-500" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
-        <SectionHead title="VPN & Security" />
+        <SectionHead title="VPN's" />
         <AppsCarousel>
           {VPN.map(app => <AppCard key={app.title} {...app} />)}
         </AppsCarousel>

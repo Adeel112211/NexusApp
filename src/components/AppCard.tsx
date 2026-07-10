@@ -70,6 +70,7 @@ export default function AppCard({ title, rating, iconUrl, priority = false, zoom
       {/* Download button */}
       <button
         onClick={e => { e.stopPropagation(); router.push(`/app/${slug}`); }}
+        className="mobile-download-btn"
         style={{
           width: '100%',
           padding: '10px 0',

@@ -44,23 +44,20 @@ export default function AppsCarousel({ children }: { children: React.ReactNode }
     border: 'none',
     color: '#fff',
     cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     boxShadow: '0 4px 15px rgba(34, 197, 94, 0.3)', // Added a subtle green glow
   });
 
   return (
     <div style={{ position: 'relative', width: '100%' }}>
       {showLeft && (
-        <button onClick={() => scroll('left')} style={btnStyle('left')} aria-label="Scroll Left">
+        <button className="hidden md:flex items-center justify-center" onClick={() => scroll('left')} style={btnStyle('left')} aria-label="Scroll Left">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
       )}
 
       <div
         ref={ref}
-        style={{ display: 'flex', gap: 16, overflowX: 'auto', scrollbarWidth: 'none', scrollSnapType: 'x mandatory', padding: '24px 16px', margin: '-24px -16px' }}
+        style={{ display: 'flex', gap: 16, overflowX: 'auto', scrollbarWidth: 'none', scrollSnapType: 'x mandatory', padding: '24px 16px', margin: '0 -16px -24px -16px' }}
         className="scrollbar-hide"
       >
         {React.Children.map(children, child => (
@@ -71,7 +68,7 @@ export default function AppsCarousel({ children }: { children: React.ReactNode }
       </div>
 
       {showRight && (
-        <button onClick={() => scroll('right')} style={btnStyle('right')} aria-label="Scroll Right">
+        <button className="hidden md:flex items-center justify-center" onClick={() => scroll('right')} style={btnStyle('right')} aria-label="Scroll Right">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       )}

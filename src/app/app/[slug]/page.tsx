@@ -375,7 +375,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
         
       <div className="container animate-fade-up flex flex-wrap gap-8 items-center justify-center" style={{ paddingTop: '32px', paddingBottom: '48px' }}>
         {/* Left Side: App Info */}
-        <div className="flex-1 flex flex-col pt-4" style={{ minWidth: '350px', maxWidth: '460px' }}>
+        <div className="w-full md:flex-1 flex flex-col pt-4" style={{ minWidth: '0', maxWidth: '460px' }}>
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-1 leading-tight">
             {app.title}
           </h1>
@@ -393,45 +393,64 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
           </p>
           
           {/* Stats & Download Container */}
-          <div className="w-fit">
+          <div className="w-full max-w-full overflow-hidden">
+            <style>{`
+              .app-stats-row { flex-wrap: nowrap; margin-bottom: 32px; }
+              .app-stats-logo { width: 84px; height: 84px; margin-right: 24px; border-radius: 20px; flex-shrink: 0; }
+              .app-stats-val { font-size: 18px; }
+              .app-stats-lbl { font-size: 13px; }
+              .app-stats-div { margin: 0 24px; height: 32px; width: 1px; flex-shrink: 0; background-color: rgba(255,255,255,0.1); }
+              
+              @media (max-width: 500px) {
+                .app-stats-logo { width: 48px; height: 48px; margin-right: 12px; border-radius: 12px; }
+                .app-stats-val { font-size: 13px; }
+                .app-stats-lbl { font-size: 10px; }
+                .app-stats-div { margin: 0 12px; height: 24px; }
+              }
+            `}</style>
+            
             {/* Stats Row */}
-            <div className="flex items-center" style={{ marginBottom: '32px' }}>
+            <div className="flex items-center pb-2 w-full justify-between sm:justify-start app-stats-row">
               {/* Logo */}
               {app.iconUrl ? (
-                <div className="flex items-center justify-center flex-shrink-0 rounded-[20px] overflow-hidden shadow-lg" style={{ width: '84px', height: '84px', marginRight: '32px' }}>
+                <div className="flex items-center justify-center overflow-hidden shadow-lg app-stats-logo">
                   <Image src={app.iconUrl} alt="icon" width={84} height={84} className="object-cover w-full h-full" priority quality={100} />
                 </div>
               ) : (
-                <div className="flex-shrink-0 rounded-[20px] bg-white/10" style={{ width: '84px', height: '84px', marginRight: '32px' }} />
+                <div className="bg-white/10 app-stats-logo" />
               )}
               
               {/* Rating */}
-              <div className="flex flex-col justify-center">
-                <div className="font-bold text-white flex items-center" style={{ fontSize: '18px', whiteSpace: 'nowrap', gap: '4px' }}>
+              <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
+                <div className="font-bold text-white flex items-center app-stats-val" style={{ whiteSpace: 'nowrap', gap: '4px' }}>
                   {app.rating}
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
                 </div>
-                <div className="text-text-muted" style={{ fontSize: '13px', whiteSpace: 'nowrap', marginTop: '2px' }}>{app.reviews}</div>
+                <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>{app.reviews}</div>
               </div>
               
               {/* Divider */}
-              <div style={{ width: '1px', height: '32px', backgroundColor: 'rgba(255,255,255,0.1)', margin: '0 32px' }} />
+              <div className="flex items-center justify-center">
+                <div className="app-stats-div" />
+              </div>
               
               {/* Downloads */}
-              <div className="flex flex-col justify-center">
-                <div className="font-bold text-white" style={{ fontSize: '18px', whiteSpace: 'nowrap' }}>{app.downloads}</div>
-                <div className="text-text-muted" style={{ fontSize: '13px', whiteSpace: 'nowrap', marginTop: '2px' }}>Downloads</div>
+              <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
+                <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{app.downloads}</div>
+                <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Downloads</div>
               </div>
               
               {/* Divider */}
               {fileSize && (
                 <>
-                  <div style={{ width: '1px', height: '32px', backgroundColor: 'rgba(255,255,255,0.1)', margin: '0 32px' }} />
+                  <div className="flex items-center justify-center">
+                    <div className="app-stats-div" />
+                  </div>
                   
-                  {/* File Size */}
-                  <div className="flex flex-col justify-center">
-                    <div className="font-bold text-white" style={{ fontSize: '18px', whiteSpace: 'nowrap' }}>{fileSize}</div>
-                    <div className="text-text-muted" style={{ fontSize: '13px', whiteSpace: 'nowrap', marginTop: '2px' }}>Size</div>
+                  {/* Size */}
+                  <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
+                    <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{fileSize}</div>
+                    <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Size</div>
                   </div>
                 </>
               )}

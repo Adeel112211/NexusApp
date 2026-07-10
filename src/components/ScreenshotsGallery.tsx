@@ -76,7 +76,7 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
   const widthClass = layout === 'single' ? 'w-full' : 'w-[calc(33.333%-11px)]';
 
   return (
-    <div className="flex-1 min-w-[500px] relative flex flex-col">
+    <div className="w-full lg:flex-1 lg:min-w-[500px] relative flex flex-col">
       {screenshots.length > 0 && (
         <div className="relative">
           {/* Left Navigation Button */}

@@ -2,12 +2,12 @@
 
 export default function Hero() {
   return (
-    <section style={{ paddingTop: '5rem', paddingBottom: '4rem', textAlign: 'center' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+    <section className="pb-8 md:pb-16 text-center" style={{ paddingTop: 'clamp(80px, 12vh, 120px)' }}>
+      <div className="container flex flex-col items-center gap-6 md:gap-8">
 
         {/* Heading */}
-        <h1 style={{ fontSize: 'clamp(2rem,4.5vw,3.5rem)', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-montserrat), Montserrat, sans-serif', letterSpacing: '-0.01em', lineHeight: 1.2, whiteSpace: 'nowrap' }}>
-          Find &amp; Download the&nbsp;
+        <h1 style={{ fontSize: 'clamp(2rem,4.5vw,3.5rem)', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-montserrat), Montserrat, sans-serif', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+          Find &amp; Download <br className="block sm:hidden" /> the{' '}
           <span
             className="font-dancing"
             style={{
@@ -48,8 +48,8 @@ export default function Hero() {
           </svg>
           <input
             type="text"
-            placeholder="Search for Mods Apps, Games, AI Tools..."
-            style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: '#F3F4F6', fontSize: '0.95rem' }}
+            placeholder="Search for Mods Apps..."
+            className="flex-1 bg-transparent border-none outline-none text-[#F3F4F6] text-sm md:text-base min-w-0"
           />
           <button
             onMouseEnter={e => {
@@ -62,18 +62,11 @@ export default function Hero() {
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.boxShadow = 'none';
             }}
+            className="hidden sm:block shrink-0 bg-[#2b2b36] text-white font-bold tracking-wider rounded-[10px] cursor-pointer transition-all duration-300"
             style={{
-              flexShrink: 0,
-              backgroundColor: '#2b2b36',
               border: '1px solid rgba(255,255,255,0.05)',
-              color: '#ffffff',
               fontSize: '0.8rem',
-              fontWeight: 700,
-              letterSpacing: '0.05em',
               padding: '10px 24px',
-              borderRadius: 10,
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
             }}
           >
             SEARCH
@@ -81,7 +74,7 @@ export default function Hero() {
         </div>
 
         {/* Filter pills */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 4 }}>
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-1">
           {['Apps', 'Games', 'Kids'].map((label) => {
             const isActive = label === 'Apps';
             return (

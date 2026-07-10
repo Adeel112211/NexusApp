@@ -17,11 +17,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${dancingScript.variable}`}>
       <body
         style={{
-          backgroundColor: '#0b0c10',
+          backgroundColor: '#090a0f', /* Deep rich void */
           color: '#F3F4F6',
           fontFamily: 'var(--font-geist-sans), Helvetica, Arial, sans-serif',
           minHeight: '100vh',
-          backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(6,182,212,0.08) 0%, transparent 60%)',
+          backgroundImage: `
+            radial-gradient(circle at 50% 50%, transparent 20%, #090a0f 100%),
+            radial-gradient(circle at 50% -20%, rgba(6, 182, 212, 0.12) 0%, transparent 60%),
+            radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 100%, 100% 100%, 28px 28px',
+          backgroundAttachment: 'fixed',
         }}
       >
         {children}
