@@ -13,6 +13,8 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
 
+  const [layout, setLayout] = useState<'single' | 'triple' | null>(null);
+
   const checkScroll = () => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
@@ -35,12 +37,11 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
         clearTimeout(timer);
       };
     }
-  }, [screenshots]);
+  }, [screenshots, layout]);
 
   const scroll = (direction: 'left' | 'right') => {
     if (containerRef.current) {
       const containerWidth = containerRef.current.clientWidth;
-      // Scroll by one full page (container width)
       containerRef.current.scrollBy({
         left: direction === 'left' ? -containerWidth : containerWidth,
         behavior: 'smooth'
@@ -55,28 +56,16 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
       { title: 'AI Translator', color: '#ec4899' }
     ];
     return (
-      <div style={{ flex: '1 1 500px', display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '1rem' }} className="no-scrollbar">
-        <style>{`
-          .no-scrollbar::-webkit-scrollbar { display: none; }
-          .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        `}</style>
+      <div className="flex-1 min-w-[500px] flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
         {features.map((feature, i) => (
-          <div key={i} style={{ 
-            minWidth: '240px', 
-            height: '480px', 
-            background: 'rgba(15, 23, 42, 0.6)', 
-            borderRadius: '16px', 
-            border: '1px solid rgba(255,255,255,0.05)', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            overflow: 'hidden',
-            position: 'relative',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
-          }}>
-            <div style={{ padding: '1.5rem 1rem 0.5rem', textAlign: 'center', fontSize: '1rem', fontWeight: 'bold', color: '#fff', zIndex: 1 }}>
+          <div key={i} className="flex-shrink-0 w-[calc(33.333%-11px)] aspect-[9/19] bg-surface/60 rounded-2xl border border-white/5 flex flex-col overflow-hidden relative shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
+            <div className="px-6 pt-4 pb-2 text-center text-[0.95rem] md:text-base font-bold text-white z-10 leading-tight">
               {feature.title}
             </div>
-            <div style={{ flex: 1, position: 'relative', margin: '0.5rem 1rem 1rem', borderRadius: '12px', background: `linear-gradient(180deg, ${feature.color} 0%, rgba(0,0,0,0.5) 100%)`, overflow: 'hidden' }}>
+            <div 
+              className="flex-1 relative mx-4 mb-4 rounded-xl bg-gradient-to-b from-[{feature.color}] to-black/50 overflow-hidden" 
+              style={{ backgroundImage: `linear-gradient(180deg, ${feature.color} 0%, rgba(0,0,0,0.5) 100%)` }}
+            >
             </div>
           </div>
         ))}
@@ -84,146 +73,72 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
     );
   }
 
+  const widthClass = layout === 'single' ? 'w-full' : 'w-[calc(33.333%-11px)]';
+
   return (
-    <div style={{ flex: '1 1 500px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
-      <style>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scroll-btn:hover {
-          background: rgba(16, 185, 129, 0.9) !important;
-          color: #fff !important;
-          border-color: #10B981 !important;
-          transform: translateY(-50%) scale(1.1);
-        }
-        .scroll-btn:active {
-          transform: translateY(-50%) scale(0.95);
-        }
-        .screenshot-item {
-          min-width: calc((100% - 2rem) / 3);
-          width: calc((100% - 2rem) / 3);
-          height: 480px;
-          position: relative;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        @media (max-width: 992px) {
-          .screenshot-item {
-            min-width: calc((100% - 1rem) / 2);
-            width: calc((100% - 1rem) / 2);
-            height: 420px;
-          }
-        }
-        @media (max-width: 768px) {
-          .scroll-btn {
-            display: none !important;
-          }
-          .screenshot-item {
-            min-width: 100%;
-            width: 100%;
-            height: 380px;
-          }
-        }
-      `}</style>
+    <div className="flex-1 min-w-[500px] relative flex flex-col">
+      {screenshots.length > 0 && (
+        <div className="relative">
+          {/* Left Navigation Button */}
+          {showLeft && (
+            <button 
+              onClick={() => scroll('left')}
+              className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-surface/85 border border-white/10 text-text-muted flex items-center justify-center cursor-pointer backdrop-blur-sm shadow-lg transition-all duration-200 hover:bg-success hover:text-white hover:border-success hover:scale-110 active:scale-95 hidden md:flex"
+              aria-label="Scroll Left"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+          )}
 
-      {/* Left Navigation Button */}
-      {showLeft && (
-        <button 
-          onClick={() => scroll('left')}
-          className="scroll-btn"
-          style={{
-            position: 'absolute',
-            left: '-20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            zIndex: 10,
-            background: 'rgba(15, 23, 42, 0.85)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: '#e2e8f0',
-            borderRadius: '50%',
-            width: '44px',
-            height: '44px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-            transition: 'all 0.2s ease-in-out'
-          }}
-          aria-label="Scroll Left"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-      )}
+          {/* Right Navigation Button */}
+          {showRight && (
+            <button 
+              onClick={() => scroll('right')}
+              className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-surface/85 border border-white/10 text-text-muted flex items-center justify-center cursor-pointer backdrop-blur-sm shadow-lg transition-all duration-200 hover:bg-success hover:text-white hover:border-success hover:scale-110 active:scale-95 hidden md:flex"
+              aria-label="Scroll Right"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          )}
 
-      {/* Right Navigation Button */}
-      {showRight && (
-        <button 
-          onClick={() => scroll('right')}
-          className="scroll-btn"
-          style={{
-            position: 'absolute',
-            right: '-20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            zIndex: 10,
-            background: 'rgba(15, 23, 42, 0.85)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: '#e2e8f0',
-            borderRadius: '50%',
-            width: '44px',
-            height: '44px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-            transition: 'all 0.2s ease-in-out'
-          }}
-          aria-label="Scroll Right"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      )}
-
-      {/* Scrollable Container */}
-      <div 
-        ref={containerRef}
-        className="no-scrollbar"
-        style={{ 
-          width: '100%',
-          display: 'flex', 
-          gap: '1rem', 
-          overflowX: 'auto', 
-          paddingBottom: '1rem',
-          WebkitOverflowScrolling: 'touch',
-          scrollBehavior: 'smooth'
-        }}
-      >
-        {screenshots.map((src: string, i: number) => (
-          <div key={i} className="screenshot-item">
-            <Image 
-              src={src} 
-              alt={`${title} screenshot ${i + 1}`} 
-              fill 
-              style={{ objectFit: 'cover' }} 
-              sizes="(max-width: 768px) 100vw, (max-width: 992px) 50vw, 33vw"
-              priority={i < 3}
-            />
+          <div 
+            ref={containerRef}
+            className="w-full flex gap-4 overflow-x-auto pb-4 touch-pan-x scroll-smooth scrollbar-hide snap-x items-center"
+          >
+            {screenshots.map((src: string, i: number) => (
+              <div 
+                key={i} 
+                className={`flex-shrink-0 ${widthClass} rounded-2xl overflow-hidden shadow-screenshot relative snap-center transition-all duration-300`}
+                style={{ aspectRatio: layout === 'single' ? '16/9' : '9/16', maxHeight: '500px' }}
+              >
+                <Image 
+                  src={src} 
+                  alt={`${title} screenshot ${i + 1}`} 
+                  fill
+                  className={layout === 'single' ? "object-contain" : "object-cover"} 
+                  sizes={layout === 'single' ? "100vw" : "(max-width: 768px) 33vw, 240px"}
+                  priority={i < 3}
+                  quality={90}
+                  onLoad={(e) => {
+                    if (layout === null && i === 0) {
+                      const target = e.target as HTMLImageElement;
+                      if (target.naturalWidth > target.naturalHeight) {
+                        setLayout('single');
+                      } else {
+                        setLayout('triple');
+                      }
+                    }
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

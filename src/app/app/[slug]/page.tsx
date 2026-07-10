@@ -5,6 +5,8 @@ import Link from 'next/link';
 import DownloadButton from '@/components/DownloadButton';
 import { getDriveFileSize } from '@/lib/drive';
 import ScreenshotsGallery from '@/components/ScreenshotsGallery';
+import AppsCarousel from '@/components/AppsCarousel';
+import AppCard from '@/components/AppCard';
 
 export default async function AppDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -302,87 +304,158 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
     }
   };
 
-  const app = appDataMap[slug] || {
-    title: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-    developer: 'Unknown Developer',
-    description: 'Download the latest version for free. Get the best features, premium tools, and unrestricted access immediately.',
-    rating: '4.5',
-    reviews: '10K reviews',
-    downloads: '1M+',
-    iconUrl: '',
-    googleDriveId: undefined,
-    screenshots: []
-  };
+  let app = appDataMap[slug];
+
+  if (!app) {
+    const fs = require('fs');
+    const path = require('path');
+    const baseDir = path.join(process.cwd(), 'public', 'Images');
+    let foundCategory = null;
+    let foundApp = null;
+    
+    try {
+      if (fs.existsSync(baseDir)) {
+        const categories = fs.readdirSync(baseDir);
+        for (const cat of categories) {
+          if (!fs.statSync(path.join(baseDir, cat)).isDirectory()) continue;
+          const apps = fs.readdirSync(path.join(baseDir, cat));
+          for (const a of apps) {
+            if (a.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug) {
+              foundCategory = cat;
+              foundApp = a;
+              break;
+            }
+          }
+          if (foundApp) break;
+        }
+      }
+    } catch(e) { console.error(e) }
+
+    let iconUrl = '';
+    let screenshots: string[] = [];
+
+    if (foundApp && foundCategory) {
+      const appDir = path.join(baseDir, foundCategory, foundApp);
+      const files = fs.readdirSync(appDir);
+      
+      let icon = files.find((f: string) => f.toLowerCase() === `${foundApp?.toLowerCase()}.png` || f.toLowerCase() === `${foundApp?.toLowerCase()}.webp` || f.toLowerCase() === `${foundApp?.toLowerCase()}.jpg`);
+      if (!icon) icon = files.find((f: string) => f.endsWith('.png') || f.endsWith('.webp') || f.endsWith('.jpg'));
+      if (icon) {
+        iconUrl = `/Images/${encodeURIComponent(foundCategory)}/${encodeURIComponent(foundApp)}/${encodeURIComponent(icon)}`;
+      }
+
+      const screenshotFiles = files.filter((f: string) => f !== icon && (f.endsWith('.png') || f.endsWith('.webp') || f.endsWith('.jpg')));
+      screenshotFiles.sort((a: string, b: string) => {
+        const numA = parseInt(a.match(/\d+/)?.[0] || '0');
+        const numB = parseInt(b.match(/\d+/)?.[0] || '0');
+        return numA - numB;
+      });
+      
+      screenshots = screenshotFiles.map((f: string) => `/Images/${encodeURIComponent(foundCategory)}/${encodeURIComponent(foundApp!)}/${encodeURIComponent(f)}`);
+    }
+
+    app = {
+      title: foundApp || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+      developer: 'Unknown Developer',
+      description: 'Download the latest version for free. Get the best features, premium tools, and unrestricted access immediately.',
+      rating: (Math.random() * (4.9 - 4.2) + 4.2).toFixed(1),
+      reviews: '10K reviews',
+      downloads: '1M+',
+      iconUrl: iconUrl,
+      googleDriveId: undefined,
+      screenshots: screenshots
+    };
+  }
 
   const fileSize = app.googleDriveId ? await getDriveFileSize(app.googleDriveId) : null;
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <main className="min-h-screen flex flex-col">
       <Navbar />
-      
-      <div className="container animate-fade-up" style={{ flex: 1, padding: '3rem 0', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
         
+      <div className="container animate-fade-up flex flex-wrap gap-8 items-center justify-center" style={{ paddingTop: '32px', paddingBottom: '48px' }}>
         {/* Left Side: App Info */}
-        <div style={{ flex: '1 1 400px', maxWidth: '600px', display: 'flex', flexDirection: 'column', paddingTop: '1rem' }}>
-          
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 600, color: '#fff', marginBottom: '0.25rem', lineHeight: 1.2 }}>
+        <div className="flex-1 flex flex-col pt-4" style={{ minWidth: '350px', maxWidth: '460px' }}>
+          <h1 className="text-3xl md:text-4xl font-semibold text-white mb-1 leading-tight">
             {app.title}
           </h1>
           
-          <div style={{ color: '#10B981', fontSize: '1.1rem', fontWeight: 500, marginBottom: '0.25rem' }}>
+          <div className="text-success text-lg font-medium mb-1">
             {app.developer}
           </div>
           
-          <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '2rem' }}>
+          <div className="text-text-muted text-sm" style={{ marginBottom: '40px' }}>
             In-app purchases
           </div>
           
-          <p style={{ color: '#e2e8f0', fontSize: '1.1rem', marginBottom: '2.5rem', lineHeight: 1.5 }}>
+          <p className="text-text-main/90 text-lg leading-relaxed" style={{ marginBottom: '24px' }}>
             {app.description}
           </p>
           
-          {/* Stats Row */}
-          <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', marginBottom: '2.5rem' }}>
-            {/* Logo */}
-            {app.iconUrl ? (
-              <div style={{ width: '56px', height: '56px', position: 'relative', borderRadius: '14px', overflow: 'hidden', background: '#fff' }}>
-                <Image src={app.iconUrl} alt="icon" fill style={{ objectFit: 'cover' }} />
+          {/* Stats & Download Container */}
+          <div className="w-fit">
+            {/* Stats Row */}
+            <div className="flex items-center" style={{ marginBottom: '32px' }}>
+              {/* Logo */}
+              {app.iconUrl ? (
+                <div className="flex items-center justify-center flex-shrink-0 rounded-[20px] overflow-hidden shadow-lg" style={{ width: '84px', height: '84px', marginRight: '32px' }}>
+                  <Image src={app.iconUrl} alt="icon" width={84} height={84} className="object-cover w-full h-full" priority quality={100} />
+                </div>
+              ) : (
+                <div className="flex-shrink-0 rounded-[20px] bg-white/10" style={{ width: '84px', height: '84px', marginRight: '32px' }} />
+              )}
+              
+              {/* Rating */}
+              <div className="flex flex-col justify-center">
+                <div className="font-bold text-white flex items-center" style={{ fontSize: '18px', whiteSpace: 'nowrap', gap: '4px' }}>
+                  {app.rating}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                </div>
+                <div className="text-text-muted" style={{ fontSize: '13px', whiteSpace: 'nowrap', marginTop: '2px' }}>{app.reviews}</div>
               </div>
-            ) : (
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(255,255,255,0.1)' }}></div>
-            )}
-            
-            {/* Rating */}
-            <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '2rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 'bold', fontSize: '1.1rem', color: '#fff' }}>
-                {app.rating}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+              
+              {/* Divider */}
+              <div style={{ width: '1px', height: '32px', backgroundColor: 'rgba(255,255,255,0.1)', margin: '0 32px' }} />
+              
+              {/* Downloads */}
+              <div className="flex flex-col justify-center">
+                <div className="font-bold text-white" style={{ fontSize: '18px', whiteSpace: 'nowrap' }}>{app.downloads}</div>
+                <div className="text-text-muted" style={{ fontSize: '13px', whiteSpace: 'nowrap', marginTop: '2px' }}>Downloads</div>
               </div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{app.reviews}</div>
+              
+              {/* Divider */}
+              {fileSize && (
+                <>
+                  <div style={{ width: '1px', height: '32px', backgroundColor: 'rgba(255,255,255,0.1)', margin: '0 32px' }} />
+                  
+                  {/* File Size */}
+                  <div className="flex flex-col justify-center">
+                    <div className="font-bold text-white" style={{ fontSize: '18px', whiteSpace: 'nowrap' }}>{fileSize}</div>
+                    <div className="text-text-muted" style={{ fontSize: '13px', whiteSpace: 'nowrap', marginTop: '2px' }}>Size</div>
+                  </div>
+                </>
+              )}
             </div>
             
-            {/* Downloads */}
-            <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '2rem' }}>
-              <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#fff' }}>{app.downloads}</div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Downloads</div>
-            </div>
-            
-            {/* File Size */}
-            {fileSize && (
-              <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '2rem' }}>
-                <div style={{ fontWeight: 'bold', fontSize: '1.1rem', color: '#fff' }}>{fileSize}</div>
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Size</div>
-              </div>
-            )}
+            {/* Interactive Install Button */}
+            <DownloadButton slug={slug} />
           </div>
-          
-          {/* Interactive Install Button */}
-          <DownloadButton slug={slug} />
         </div>
         
         {/* Right Side: Screenshots Gallery */}
         <ScreenshotsGallery screenshots={app.screenshots} title={app.title} />
       </div>
+      
+      {/* AI Tools Section */}
+      <section className="container animate-fade-up mt-16 pt-8 border-t border-white/5">
+        <h2 className="text-lg font-extrabold uppercase tracking-wider text-white mb-6">AI TOOLS</h2>
+        <AppsCarousel>
+          <AppCard title="ChatGPT" rating={4.8} iconUrl="/Images/Ai/ChatGPT/ChatGPT.png" isFree={true} priority={true} />
+          <AppCard title="Grok AI" rating={4.6} iconUrl="/Images/Ai/Grok%20AI/Grok%20AI.png" isFree={true} priority={true} />
+          <AppCard title="Microsoft Copilot" rating={4.7} iconUrl="/Images/Ai/Microsoft%20Copilot/Microsoft%20Copilot.png" isFree={true} />
+          <AppCard title="Perplexity AI" rating={4.8} iconUrl="/Images/Ai/Perplexity%20AI/Perplexity%20AI.png" isFree={true} />
+        </AppsCarousel>
+      </section>
       
       <Footer />
     </main>

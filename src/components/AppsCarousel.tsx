@@ -2,173 +2,79 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 
-interface AppsCarouselProps {
-  children: React.ReactNode;
-}
-
-export default function AppsCarousel({ children }: AppsCarouselProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [showLeft, setShowLeft] = useState(false);
+export default function AppsCarousel({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
   const [showRight, setShowRight] = useState(false);
+  const [showLeft,  setShowLeft]  = useState(false);
 
-  const checkScroll = () => {
-    if (containerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      setShowLeft(scrollLeft > 10);
-      setShowRight(scrollLeft + clientWidth < scrollWidth - 10);
-    }
+  const check = () => {
+    if (!ref.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = ref.current;
+    setShowLeft(scrollLeft > 8);
+    setShowRight(scrollLeft + clientWidth < scrollWidth - 8);
   };
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (el) {
-      checkScroll();
-      el.addEventListener('scroll', checkScroll);
-      window.addEventListener('resize', checkScroll);
-      
-      const timer = setTimeout(checkScroll, 300);
-      return () => {
-        el.removeEventListener('scroll', checkScroll);
-        window.removeEventListener('resize', checkScroll);
-        clearTimeout(timer);
-      };
-    }
+    const el = ref.current;
+    if (!el) return;
+    check();
+    el.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    return () => { el.removeEventListener('scroll', check); window.removeEventListener('resize', check); };
   }, [children]);
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (containerRef.current) {
-      const containerWidth = containerRef.current.clientWidth;
-      const scrollAmount = direction === 'left' ? -containerWidth * 0.75 : containerWidth * 0.75;
-      containerRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+  const scroll = (dir: 'left' | 'right') => {
+    if (ref.current) {
+      const scrollAmount = ref.current.clientWidth;
+      ref.current.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
 
+  const btnStyle = (side: 'left' | 'right'): React.CSSProperties => ({
+    position: 'absolute',
+    top: '50%',
+    bottom: 'auto',
+    [side]: -64,    // Pushed out even further
+    transform: 'translateY(-50%)',
+    zIndex: 10,
+    width: 36,
+    height: 36,
+    borderRadius: '50%',
+    backgroundColor: '#22C55E', // Changed to green
+    border: 'none',
+    color: '#fff',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 4px 15px rgba(34, 197, 94, 0.3)', // Added a subtle green glow
+  });
+
   return (
-    <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column' }}>
-      <style>{`
-        .carousel-no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .carousel-no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .carousel-btn:hover {
-          background: rgba(16, 185, 129, 0.9) !important;
-          color: #fff !important;
-          border-color: #10B981 !important;
-          transform: translateY(-50%) scale(1.1);
-        }
-        .carousel-btn:active {
-          transform: translateY(-50%) scale(0.95);
-        }
-        .carousel-item-wrapper {
-          min-width: 170px;
-          width: 170px;
-          flex-shrink: 0;
-        }
-        @media (max-width: 768px) {
-          .carousel-btn {
-            display: none !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .carousel-item-wrapper {
-            min-width: 145px;
-            width: 145px;
-          }
-        }
-      `}</style>
-
-      {/* Left Navigation Button */}
+    <div style={{ position: 'relative', width: '100%' }}>
       {showLeft && (
-        <button 
-          onClick={() => scroll('left')}
-          className="carousel-btn"
-          style={{
-            position: 'absolute',
-            left: '-20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            zIndex: 10,
-            background: 'rgba(15, 23, 42, 0.85)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: '#e2e8f0',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-            transition: 'all 0.2s ease-in-out'
-          }}
-          aria-label="Scroll Left"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
+        <button onClick={() => scroll('left')} style={btnStyle('left')} aria-label="Scroll Left">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
       )}
 
-      {/* Right Navigation Button */}
-      {showRight && (
-        <button 
-          onClick={() => scroll('right')}
-          className="carousel-btn"
-          style={{
-            position: 'absolute',
-            right: '-20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            zIndex: 10,
-            background: 'rgba(15, 23, 42, 0.85)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: '#e2e8f0',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-            transition: 'all 0.2s ease-in-out'
-          }}
-          aria-label="Scroll Right"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      )}
-
-      {/* Scrollable Container */}
-      <div 
-        ref={containerRef}
-        className="carousel-no-scrollbar"
-        style={{ 
-          width: '100%',
-          display: 'flex', 
-          gap: '1.5rem', 
-          overflowX: 'auto', 
-          padding: '0.75rem 0.25rem 1.5rem 0.25rem',
-          WebkitOverflowScrolling: 'touch',
-          scrollBehavior: 'smooth'
-        }}
+      <div
+        ref={ref}
+        style={{ display: 'flex', gap: 16, overflowX: 'auto', scrollbarWidth: 'none', scrollSnapType: 'x mandatory', padding: '24px 16px', margin: '-24px -16px' }}
+        className="scrollbar-hide"
       >
-        {React.Children.map(children, (child) => (
-          <div className="carousel-item-wrapper">
+        {React.Children.map(children, child => (
+          <div className="shrink-0 scroll-snap-align-start w-[calc((100%-48px)/2)] md:w-[calc((100%-80px)/4)] lg:w-[calc((100%-112px)/6)]">
             {child}
           </div>
         ))}
       </div>
+
+      {showRight && (
+        <button onClick={() => scroll('right')} style={btnStyle('right')} aria-label="Scroll Right">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      )}
     </div>
   );
 }

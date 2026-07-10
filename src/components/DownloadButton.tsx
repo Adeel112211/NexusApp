@@ -101,7 +101,37 @@ export default function DownloadButton({ slug }: { slug: string }) {
 
   return (
     <>
-      <button onClick={handleDownload} className="download-large-btn" style={{ maxWidth: '300px', padding: '0.8rem 1.5rem', borderRadius: '8px' }}>
+      <button 
+        onClick={handleDownload} 
+        style={{ 
+          width: '100%',
+          padding: '14px 24px', 
+          borderRadius: 8,
+          backgroundColor: '#22C55E',
+          color: '#ffffff',
+          fontWeight: 800,
+          fontSize: '1rem',
+          letterSpacing: '0.05em',
+          border: 'none',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+          boxShadow: '0 10px 40px -10px rgba(34,197,94,0.6)',
+          transition: 'all 0.3s ease'
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.backgroundColor = '#16a34a';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+          e.currentTarget.style.boxShadow = '0 15px 40px -5px rgba(34,197,94,0.8)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.backgroundColor = '#22C55E';
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 10px 40px -10px rgba(34,197,94,0.6)';
+        }}
+      >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>

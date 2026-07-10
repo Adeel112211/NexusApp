@@ -1,86 +1,180 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import AppCard from '@/components/AppCard';
-import StatsRow from '@/components/StatsRow';
+import Navbar    from '@/components/Navbar';
+import Hero      from '@/components/Hero';
+import AppCard   from '@/components/AppCard';
+import StatsRow  from '@/components/StatsRow';
 import CategoryCard from '@/components/CategoryCard';
-import ListRow from '@/components/ListRow';
-import Footer from '@/components/Footer';
-import styles from './page.module.css';
+import ListRow   from '@/components/ListRow';
+import Footer    from '@/components/Footer';
 import AppsCarousel from '@/components/AppsCarousel';
+
+/* ─── Consistent section heading ──────────────────────── */
+function SectionHead({ title }: { title: string }) {
+  return (
+    <h2 style={{ fontSize: '0.9rem', fontWeight: 800, letterSpacing: '0.12em', color: '#F3F4F6', marginBottom: 24, textTransform: 'uppercase' as const }}>
+      {title}
+    </h2>
+  );
+}
+
+/* ─── Shared max-width wrapper ─────────────────────────── */
+const wrap: React.CSSProperties = { maxWidth: 1280, margin: '0 auto', padding: '0 2rem' };
+
+/* ─── Data Arrays for DRY Code ─────────────────────────── */
+const TRENDING_APPS = [
+  { title: "Capcut",        rating: 4.8, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Capcut/Capcut.png",               priority: true, zoomIcon: true },
+  { title: "Kinemaster",    rating: 4.7, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Kinemaster/Kine%20Master.png",      priority: true },
+  { title: "Alight Motion", rating: 4.9, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png",  priority: true },
+  { title: "VN Editor",     rating: 4.6, iconUrl: "/Images/Video%20%26%20Photo%20Editing/VN%20Editor/Vn%20Editor.png",       priority: true, zoomIcon: true },
+  { title: "Canva",         rating: 4.8, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Canva/Canva.png" },
+  { title: "InShot",        rating: 4.8, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Inshot/Inshot.png" },
+  { title: "Lightroom",     rating: 4.7, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Lightroom/Lightroom.png" },
+  { title: "Picsart",       rating: 4.5, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Picsart/Picsart.png" },
+  { title: "Remini",        rating: 4.6, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Remini/Remini.png" },
+  { title: "Snapseed",      rating: 4.4, iconUrl: "/Images/Video%20%26%20Photo%20Editing/Snapseed/Snapseed.png" },
+];
+
+const AI_TOOLS = [
+  { title: "ChatGPT",           rating: 4.8, iconUrl: "/Images/Ai/ChatGPT/ChatGPT.png" },
+  { title: "Grok AI",           rating: 4.6, iconUrl: "/Images/Ai/Grok%20AI/Grok%20AI.png" },
+  { title: "Microsoft Copilot", rating: 4.7, iconUrl: "/Images/Ai/Microsoft%20Copilot/Microsoft%20Copilot.png" },
+  { title: "Perplexity AI",     rating: 4.8, iconUrl: "/Images/Ai/Perplexity%20AI/Perplexity%20AI.png" },
+];
+
+const GAMES = [
+  { title: "8 Ball Pool", rating: 4.3, iconUrl: "/Images/Games/8%20Ball%20Pool/8%20Ball%20Pool.webp" },
+  { title: "Car Parking Multiplayer", rating: 4.4, iconUrl: "/Images/Games/Car%20Parking%20Multiplayer/Car%20Parking%20Multiplayer.webp" },
+  { title: "Clash of Clans", rating: 4.9, iconUrl: "/Images/Games/Clash%20of%20Clans/Clash%20of%20Clans.webp" },
+  { title: "Clash Royale", rating: 4.3, iconUrl: "/Images/Games/Clash%20Royale/Clash%20Royale.webp" },
+  { title: "Dream League Soccer", rating: 4.9, iconUrl: "/Images/Games/Dream%20League%20Soccer/Dream%20League%20Soccer.webp" },
+  { title: "Free Fire", rating: 4.4, iconUrl: "/Images/Games/Free%20Fire/Free%20Fire.webp" },
+  { title: "GTA San Andreas", rating: 4.5, iconUrl: "/Images/Games/GTA%20San%20Andreas/GTA%20San%20Andreas.webp" },
+  { title: "Hill Climb Racing", rating: 4.8, iconUrl: "/Images/Games/Hill%20Climb%20Racing/Hill%20Climb%20Racing.webp" },
+  { title: "Hill Climb Racing 2", rating: 4.7, iconUrl: "/Images/Games/Hill%20Climb%20Racing%202/Hill%20Climb%20Racing%202.webp" },
+  { title: "Minecraft", rating: 4.5, iconUrl: "/Images/Games/Minecraft/Minecraft.webp" },
+  { title: "PUBG MOBILE", rating: 4.4, iconUrl: "/Images/Games/PUBG%20MOBILE/PUBG%20MOBILE.webp" },
+  { title: "Roblox", rating: 4.7, iconUrl: "/Images/Games/Roblox/Roblox.webp" },
+  { title: "Shadow Fight 2", rating: 4.6, iconUrl: "/Images/Games/Shadow%20Fight%202/Shadow%20Fight%202.webp" },
+  { title: "Stumble Guys", rating: 4.3, iconUrl: "/Images/Games/Stumble%20Guys/Stumble%20Guys.webp" },
+  { title: "Subway Surfers", rating: 4.6, iconUrl: "/Images/Games/Subway%20Surfers/Subway%20Surfers.webp" }
+];
+
+const MUSIC = [
+  { title: "Amazon Music", rating: 4.6, iconUrl: "/Images/Music/Amazon%20Music/Amazon%20Music.webp" },
+  { title: "Anghami", rating: 4.4, iconUrl: "/Images/Music/Anghami/Anghami.webp" },
+  { title: "Audiomack", rating: 4.7, iconUrl: "/Images/Music/Audiomack/Audiomack.webp" },
+  { title: "Boomplay", rating: 4.4, iconUrl: "/Images/Music/Boomplay/Boomplay.webp" },
+  { title: "Deezer", rating: 4.5, iconUrl: "/Images/Music/Deezer/Deezer.webp" },
+  { title: "Gaana", rating: 4.8, iconUrl: "/Images/Music/Gaana/Gaana.webp" },
+  { title: "Napster", rating: 4.8, iconUrl: "/Images/Music/Napster/Napster.webp" },
+  { title: "SoundCloud", rating: 4.8, iconUrl: "/Images/Music/SoundCloud/SoundCloud.webp" },
+  { title: "Spotify", rating: 4.6, iconUrl: "/Images/Music/Spotify/Spotify.png" },
+  { title: "YouTube Music", rating: 4.2, iconUrl: "/Images/Music/YouTube%20Music/YouTube%20Music.webp" }
+];
+
+const VPN = [
+  { title: "ExpressVPN", rating: 4.6, iconUrl: "/Images/VPN/ExpressVPN/ExpressVPN.png" },
+  { title: "hide.me VPN", rating: 4.4, iconUrl: "/Images/VPN/hide.me%20VPN/hide.me%20VPN.png" },
+  { title: "NordVPN", rating: 4.8, iconUrl: "/Images/VPN/NordVPN/NordVPN.png" },
+  { title: "Proton VPN", rating: 4.5, iconUrl: "/Images/VPN/Proton%20VPN/Proton%20VPN.png" },
+  { title: "Psiphon VPN", rating: 4.8, iconUrl: "/Images/VPN/Psiphon%20VPN/Psiphon%20VPN.png" },
+  { title: "SuperVPN", rating: 4.9, iconUrl: "/Images/VPN/SuperVPN/SuperVPN.png" },
+  { title: "Thunder VPN", rating: 4.7, iconUrl: "/Images/VPN/Thunder%20VPN/Thunder%20VPN.webp" },
+  { title: "Turbo VPN", rating: 4.4, iconUrl: "/Images/VPN/Turbo%20VPN/Turbo%20VPN.png" },
+  { title: "VPN Windscribe", rating: 4.8, iconUrl: "/Images/VPN/VPN%20Windscribe/VPN%20Windscribe.png" }
+];
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <Navbar />
-      
       <Hero />
 
-      {/* Trending Now */}
-      <section className="container animate-fade-up" style={{ marginBottom: '4rem' }}>
-        <h2 className={styles.sectionTitle}>TRENDING NOW</h2>
+      {/* ── Trending Now ──────────────────────────────── */}
+      <section className="container animate-fade-up" style={{ marginTop: 8, marginBottom: '4rem' }}>
+        <SectionHead title="Trending Now" />
         <AppsCarousel>
-          <AppCard title="Capcut" rating={4.8} iconUrl="/Images/Video%20%26%20Photo%20Editing/Capcut/Capcut.png" isFree={true} />
-          <AppCard title="Kinemaster" rating={4.7} iconUrl="/Images/Video%20%26%20Photo%20Editing/Kinemaster/Kine%20Master.png" isFree={true} />
-          <AppCard title="Alight Motion" rating={4.9} iconUrl="/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png" isFree={true} />
-          <AppCard title="VN Editor" rating={4.6} iconUrl="/Images/Video%20%26%20Photo%20Editing/VN%20Editor/Vn%20Editor.png" isFree={true} />
-          <AppCard title="Canva" rating={4.8} iconUrl="/Images/Video%20%26%20Photo%20Editing/Canva/Canva.png" isFree={true} />
-          <AppCard title="InShot" rating={4.8} iconUrl="/Images/Video%20%26%20Photo%20Editing/Inshot/Inshot.png" isFree={true} />
-          <AppCard title="Lightroom" rating={4.7} iconUrl="/Images/Video%20%26%20Photo%20Editing/Lightroom/Lightroom.png" isFree={true} />
-          <AppCard title="Picsart" rating={4.5} iconUrl="/Images/Video%20%26%20Photo%20Editing/Picsart/Picsart.png" isFree={true} />
-          <AppCard title="Remini" rating={4.6} iconUrl="/Images/Video%20%26%20Photo%20Editing/Remini/Remini.png" isFree={true} />
-          <AppCard title="Snapseed" rating={4.4} iconUrl="/Images/Video%20%26%20Photo%20Editing/Snapseed/Snapseed.png" isFree={true} />
+          {TRENDING_APPS.map(app => <AppCard key={app.title} {...app} />)}
         </AppsCarousel>
       </section>
 
-      <div className="animate-fade-up delay-100">
+      {/* ── Stats ─────────────────────────────────────── */}
+      <div className="container animate-fade-up delay-100">
         <StatsRow />
       </div>
 
-      {/* Explore Categories */}
-      <section className="container animate-fade-up delay-200" style={{ marginBottom: '4rem' }}>
-        <h2 className={styles.sectionTitle}>Explore Categories</h2>
-        <div className={styles.grid4}>
-          <CategoryCard 
-            title="Social" 
-            subtitle="Connect & Chat"
-            icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>}
-          />
-          <CategoryCard 
-            title="AI Tools" 
-            subtitle="Smart Efficiency"
-            icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>}
-          />
-          <CategoryCard 
-            title="Games" 
-            subtitle="Action & RPG"
-            icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="16" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line></svg>}
-          />
-          <CategoryCard 
-            title="Utilities" 
-            subtitle="System Tools"
-            icon={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>}
-          />
-        </div>
+      {/* ── AI Tools ──────────────────────────────────── */}
+      <section className="container animate-fade-up delay-200" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+        <SectionHead title="AI Tools" />
+        <AppsCarousel>
+          {AI_TOOLS.map(app => <AppCard key={app.title} {...app} />)}
+        </AppsCarousel>
       </section>
 
-      {/* Top Downloads */}
-      <section className="container animate-fade-up delay-300" style={{ marginBottom: '4rem' }}>
-        <h2 className={styles.sectionTitle}>Top Downloads</h2>
-        <div className={styles.listContainer}>
-          <ListRow rank={1} title="SkySocial" category="Social • 18+" size="45MB" downloads="1.2M" />
-          <ListRow rank={2} title="Shadow Ops" category="Games • Action" size="1.2GB" downloads="850k" />
-          <ListRow rank={3} title="WealthFlow" category="Finance" size="32MB" downloads="450k" />
-        </div>
+      {/* ── Games ───────────────────────────────────────── */}
+      <section className="container animate-fade-up delay-300" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+        <SectionHead title="Top Games" />
+        <AppsCarousel>
+          {GAMES.map(app => <AppCard key={app.title} {...app} />)}
+        </AppsCarousel>
       </section>
 
-      {/* Promotional Banner */}
+      {/* ── Music ───────────────────────────────────────── */}
+      <section className="container animate-fade-up delay-400" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+        <SectionHead title="Music & Audio" />
+        <AppsCarousel>
+          {MUSIC.map(app => <AppCard key={app.title} {...app} />)}
+        </AppsCarousel>
+      </section>
+
+      {/* ── VPN ─────────────────────────────────────────── */}
+      <section className="container animate-fade-up delay-500" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+        <SectionHead title="VPN & Security" />
+        <AppsCarousel>
+          {VPN.map(app => <AppCard key={app.title} {...app} />)}
+        </AppsCarousel>
+      </section>
+
+
+
+      {/* ── Promo Banner ───────────────────────────────── */}
       <section className="container animate-fade-up delay-300" style={{ marginBottom: '4rem' }}>
-        <div className={styles.promoBanner}>
-          <div className={styles.promoContent}>
-            <h3>NEO-DYSTOPIA: CHRONICLES</h3>
-            <p>FIGHT FOR THE FUTURE</p>
-            <button className="btn btn-primary">PLAY NOW</button>
+        <div style={{
+          borderRadius: 16,
+          border: '1px solid rgba(255,255,255,0.08)',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          minHeight: 220,
+          background: 'linear-gradient(135deg,#0d1117 0%,#1a1f2e 100%)',
+          position: 'relative',
+        }}>
+          {/* Text side */}
+          <div style={{ padding: '2.5rem 3rem', zIndex: 1, flex: 1 }}>
+            <h3 style={{ fontSize: '1.75rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1.1, marginBottom: 8 }}>
+              NEO-DYSTOPIA:<br />CHRONICLES
+            </h3>
+            <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em', color: '#06B6D4', marginBottom: 24 }}>FIGHT FOR THE FUTURE</p>
+            <button style={{
+              padding: '10px 28px',
+              borderRadius: 8,
+              background: '#4F46E5',
+              border: 'none',
+              color: '#fff',
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              cursor: 'pointer',
+            }}>
+              PLAY NOW
+            </button>
           </div>
+
+          {/* Image/gradient side */}
+          <div style={{
+            position: 'absolute', top: 0, right: 0, bottom: 0, width: '55%',
+            background: 'linear-gradient(90deg,#0d1117 0%,transparent 30%),linear-gradient(135deg,rgba(79,70,229,0.3),rgba(6,182,212,0.2))',
+            borderRadius: '0 14px 14px 0',
+          }} />
         </div>
       </section>
 
