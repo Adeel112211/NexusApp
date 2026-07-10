@@ -19,16 +19,16 @@ export default function Home() {
       <section className="container animate-fade-up" style={{ marginBottom: '4rem' }}>
         <h2 className={styles.sectionTitle}>TRENDING NOW</h2>
         <AppsCarousel>
-          <AppCard title="Capcut" rating={4.8} iconUrl="/Images/Capcut/Capcut.png" isFree={true} />
-          <AppCard title="Kinemaster" rating={4.7} iconUrl="/Images/Kinemaster/Kine Master.png" isFree={true} />
-          <AppCard title="Alight Motion" rating={4.9} iconUrl="/Images/Alightmotion/Alight Motion.png" isFree={true} />
-          <AppCard title="VN Editor" rating={4.6} iconUrl="/Images/VN Editor/Vn Editor.png" isFree={true} />
-          <AppCard title="Canva" rating={4.8} iconUrl="/Images/Canva/Canva.png" isFree={true} />
-          <AppCard title="InShot" rating={4.8} iconUrl="/Images/Inshot/Inshot.png" isFree={true} />
-          <AppCard title="Lightroom" rating={4.7} iconUrl="/Images/Lightroom/Lightroom.png" isFree={true} />
-          <AppCard title="Picsart" rating={4.5} iconUrl="/Images/Picsart/Picsart.png" isFree={true} />
-          <AppCard title="Remini" rating={4.6} iconUrl="/Images/Remini/Remini.png" isFree={true} />
-          <AppCard title="Snapseed" rating={4.4} iconUrl="/Images/Snapseed/Snapseed.png" isFree={true} />
+          <AppCard title="Capcut" rating={4.8} iconUrl="/Images/Video%20%26%20Photo%20Editing/Capcut/Capcut.png" isFree={true} />
+          <AppCard title="Kinemaster" rating={4.7} iconUrl="/Images/Video%20%26%20Photo%20Editing/Kinemaster/Kine%20Master.png" isFree={true} />
+          <AppCard title="Alight Motion" rating={4.9} iconUrl="/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png" isFree={true} />
+          <AppCard title="VN Editor" rating={4.6} iconUrl="/Images/Video%20%26%20Photo%20Editing/VN%20Editor/Vn%20Editor.png" isFree={true} />
+          <AppCard title="Canva" rating={4.8} iconUrl="/Images/Video%20%26%20Photo%20Editing/Canva/Canva.png" isFree={true} />
+          <AppCard title="InShot" rating={4.8} iconUrl="/Images/Video%20%26%20Photo%20Editing/Inshot/Inshot.png" isFree={true} />
+          <AppCard title="Lightroom" rating={4.7} iconUrl="/Images/Video%20%26%20Photo%20Editing/Lightroom/Lightroom.png" isFree={true} />
+          <AppCard title="Picsart" rating={4.5} iconUrl="/Images/Video%20%26%20Photo%20Editing/Picsart/Picsart.png" isFree={true} />
+          <AppCard title="Remini" rating={4.6} iconUrl="/Images/Video%20%26%20Photo%20Editing/Remini/Remini.png" isFree={true} />
+          <AppCard title="Snapseed" rating={4.4} iconUrl="/Images/Video%20%26%20Photo%20Editing/Snapseed/Snapseed.png" isFree={true} />
         </AppsCarousel>
       </section>
 

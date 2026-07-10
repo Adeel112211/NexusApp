@@ -18,16 +18,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
     rating: '4.6',
     reviews: '3M reviews',
     downloads: '100M+',
-    iconUrl: '/Images/Video & Photo Editing/VN Editor/Vn Editor.png',
+    iconUrl: '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/Vn%20Editor.png',
     screenshots: [
-      '/Images/Video & Photo Editing/VN Editor/1.png',
-      '/Images/Video & Photo Editing/VN Editor/2.png',
-      '/Images/Video & Photo Editing/VN Editor/3.png',
-      '/Images/Video & Photo Editing/VN Editor/4.png',
-      '/Images/Video & Photo Editing/VN Editor/5.png',
-      '/Images/Video & Photo Editing/VN Editor/6.png',
-      '/Images/Video & Photo Editing/VN Editor/7.png',
-      '/Images/Video & Photo Editing/VN Editor/8.png'
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/1.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/2.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/3.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/4.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/5.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/6.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/7.png',
+      '/Images/Video%20%26%20Photo%20Editing/VN%20Editor/8.png'
     ]
   };
 
@@ -40,17 +40,17 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.3',
       reviews: '12.8M reviews',
       downloads: '1B+',
-      iconUrl: '/Images/Video & Photo Editing/Capcut/Capcut.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Capcut/Capcut.png',
       googleDriveId: '1EgtZZA5JFYjFDsEeWSq21GNjjvTBtxe8',
       screenshots: [
-        '/Images/Video & Photo Editing/Capcut/1.png',
-        '/Images/Video & Photo Editing/Capcut/2.png',
-        '/Images/Video & Photo Editing/Capcut/3.png',
-        '/Images/Video & Photo Editing/Capcut/4.png',
-        '/Images/Video & Photo Editing/Capcut/5.png',
-        '/Images/Video & Photo Editing/Capcut/6.png',
-        '/Images/Video & Photo Editing/Capcut/7.png',
-        '/Images/Video & Photo Editing/Capcut/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Capcut/8.png'
       ]
     },
     'kinemaster': {
@@ -60,17 +60,17 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.7',
       reviews: '5M reviews',
       downloads: '100M+',
-      iconUrl: '/Images/Video & Photo Editing/Kinemaster/Kine Master.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Kinemaster/Kine%20Master.png',
       googleDriveId: '1iMSl7I4jbS2ylW117UPEbJ4FMJ9NderH',
       screenshots: [
-        '/Images/Video & Photo Editing/Kinemaster/1.png',
-        '/Images/Video & Photo Editing/Kinemaster/2.png',
-        '/Images/Video & Photo Editing/Kinemaster/3.png',
-        '/Images/Video & Photo Editing/Kinemaster/4.png',
-        '/Images/Video & Photo Editing/Kinemaster/5.png',
-        '/Images/Video & Photo Editing/Kinemaster/6.png',
-        '/Images/Video & Photo Editing/Kinemaster/7.png',
-        '/Images/Video & Photo Editing/Kinemaster/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Kinemaster/8.png'
       ]
     },
     'alight-motion': {
@@ -80,16 +80,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.9',
       reviews: '8M reviews',
       downloads: '50M+',
-      iconUrl: '/Images/Video & Photo Editing/Alightmotion/Alight Motion.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png',
       screenshots: [
-        '/Images/Video & Photo Editing/Alightmotion/1.png',
-        '/Images/Video & Photo Editing/Alightmotion/2.png',
-        '/Images/Video & Photo Editing/Alightmotion/3.png',
-        '/Images/Video & Photo Editing/Alightmotion/4.png',
-        '/Images/Video & Photo Editing/Alightmotion/5.png',
-        '/Images/Video & Photo Editing/Alightmotion/6.png',
-        '/Images/Video & Photo Editing/Alightmotion/7.png',
-        '/Images/Video & Photo Editing/Alightmotion/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/8.png'
       ]
     },
     'alightmotion': {
@@ -99,16 +99,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.9',
       reviews: '8M reviews',
       downloads: '50M+',
-      iconUrl: '/Images/Video & Photo Editing/Alightmotion/Alight Motion.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Alightmotion/Alight%20Motion.png',
       screenshots: [
-        '/Images/Video & Photo Editing/Alightmotion/1.png',
-        '/Images/Video & Photo Editing/Alightmotion/2.png',
-        '/Images/Video & Photo Editing/Alightmotion/3.png',
-        '/Images/Video & Photo Editing/Alightmotion/4.png',
-        '/Images/Video & Photo Editing/Alightmotion/5.png',
-        '/Images/Video & Photo Editing/Alightmotion/6.png',
-        '/Images/Video & Photo Editing/Alightmotion/7.png',
-        '/Images/Video & Photo Editing/Alightmotion/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Alightmotion/8.png'
       ]
     },
     'vn-video-editor': vnEditorData,
@@ -120,16 +120,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.8',
       reviews: '14M reviews',
       downloads: '500M+',
-      iconUrl: '/Images/Video & Photo Editing/Canva/Canva.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Canva/Canva.png',
       screenshots: [
-        '/Images/Video & Photo Editing/Canva/1.png',
-        '/Images/Video & Photo Editing/Canva/2.png',
-        '/Images/Video & Photo Editing/Canva/3.png',
-        '/Images/Video & Photo Editing/Canva/4.png',
-        '/Images/Video & Photo Editing/Canva/5.png',
-        '/Images/Video & Photo Editing/Canva/6.png',
-        '/Images/Video & Photo Editing/Canva/7.png',
-        '/Images/Video & Photo Editing/Canva/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Canva/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Canva/8.png'
       ]
     },
     'inshot': {
@@ -139,25 +139,25 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.8',
       reviews: '18M reviews',
       downloads: '500M+',
-      iconUrl: '/Images/Video & Photo Editing/Inshot/Inshot.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Inshot/Inshot.png',
       screenshots: [
-        '/Images/Video & Photo Editing/Inshot/1.png',
-        '/Images/Video & Photo Editing/Inshot/2.png',
-        '/Images/Video & Photo Editing/Inshot/3.png',
-        '/Images/Video & Photo Editing/Inshot/4.png',
-        '/Images/Video & Photo Editing/Inshot/5.png',
-        '/Images/Video & Photo Editing/Inshot/6.png',
-        '/Images/Video & Photo Editing/Inshot/7.png',
-        '/Images/Video & Photo Editing/Inshot/8.png',
-        '/Images/Video & Photo Editing/Inshot/9.png',
-        '/Images/Video & Photo Editing/Inshot/10.png',
-        '/Images/Video & Photo Editing/Inshot/11.png',
-        '/Images/Video & Photo Editing/Inshot/12.png',
-        '/Images/Video & Photo Editing/Inshot/13.png',
-        '/Images/Video & Photo Editing/Inshot/14.png',
-        '/Images/Video & Photo Editing/Inshot/15.png',
-        '/Images/Video & Photo Editing/Inshot/16.png',
-        '/Images/Video & Photo Editing/Inshot/17.png'
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/8.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/9.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/10.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/11.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/12.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/13.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/14.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/15.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/16.png',
+        '/Images/Video%20%26%20Photo%20Editing/Inshot/17.png'
       ]
     },
     'lightroom': {
@@ -167,7 +167,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.7',
       reviews: '10M reviews',
       downloads: '100M+',
-      iconUrl: '/Images/Video & Photo Editing/Lightroom/Lightroom.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Lightroom/Lightroom.png',
       screenshots: []
     },
     'picsart': {
@@ -177,16 +177,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.5',
       reviews: '11M reviews',
       downloads: '1B+',
-      iconUrl: '/Images/Video & Photo Editing/Picsart/Picsart.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Picsart/Picsart.png',
       screenshots: [
-        '/Images/Video & Photo Editing/Picsart/1.png',
-        '/Images/Video & Photo Editing/Picsart/2.png',
-        '/Images/Video & Photo Editing/Picsart/3.png',
-        '/Images/Video & Photo Editing/Picsart/4.png',
-        '/Images/Video & Photo Editing/Picsart/5.png',
-        '/Images/Video & Photo Editing/Picsart/6.png',
-        '/Images/Video & Photo Editing/Picsart/7.png',
-        '/Images/Video & Photo Editing/Picsart/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Picsart/8.png'
       ]
     },
     'remini': {
@@ -196,7 +196,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.6',
       reviews: '3M reviews',
       downloads: '100M+',
-      iconUrl: '/Images/Video & Photo Editing/Remini/Remini.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Remini/Remini.png',
       screenshots: []
     },
     'snapseed': {
@@ -206,16 +206,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.4',
       reviews: '1.5M reviews',
       downloads: '100M+',
-      iconUrl: '/Images/Video & Photo Editing/Snapseed/Snapseed.png',
+      iconUrl: '/Images/Video%20%26%20Photo%20Editing/Snapseed/Snapseed.png',
       screenshots: [
-        '/Images/Video & Photo Editing/Snapseed/1.png',
-        '/Images/Video & Photo Editing/Snapseed/2.png',
-        '/Images/Video & Photo Editing/Snapseed/3.png',
-        '/Images/Video & Photo Editing/Snapseed/4.png',
-        '/Images/Video & Photo Editing/Snapseed/5.png',
-        '/Images/Video & Photo Editing/Snapseed/6.png',
-        '/Images/Video & Photo Editing/Snapseed/7.png',
-        '/Images/Video & Photo Editing/Snapseed/8.png'
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/1.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/2.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/3.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/4.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/5.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/6.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/7.png',
+        '/Images/Video%20%26%20Photo%20Editing/Snapseed/8.png'
       ]
     },
     'chatgpt': {
@@ -251,15 +251,15 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.6',
       reviews: '500K reviews',
       downloads: '10M+',
-      iconUrl: '/Images/Ai/Grok AI/Grok AI.png',
+      iconUrl: '/Images/Ai/Grok%20AI/Grok%20AI.png',
       screenshots: [
-        '/Images/Ai/Grok AI/1.png',
-        '/Images/Ai/Grok AI/2.png',
-        '/Images/Ai/Grok AI/3.png',
-        '/Images/Ai/Grok AI/4.png',
-        '/Images/Ai/Grok AI/5.png',
-        '/Images/Ai/Grok AI/6.png',
-        '/Images/Ai/Grok AI/7.png'
+        '/Images/Ai/Grok%20AI/1.png',
+        '/Images/Ai/Grok%20AI/2.png',
+        '/Images/Ai/Grok%20AI/3.png',
+        '/Images/Ai/Grok%20AI/4.png',
+        '/Images/Ai/Grok%20AI/5.png',
+        '/Images/Ai/Grok%20AI/6.png',
+        '/Images/Ai/Grok%20AI/7.png'
       ]
     },
     'microsoft-copilot': {
@@ -269,16 +269,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.7',
       reviews: '2.5M reviews',
       downloads: '50M+',
-      iconUrl: '/Images/Ai/Microsoft Copilot/Microsoft Copilot.png',
+      iconUrl: '/Images/Ai/Microsoft%20Copilot/Microsoft%20Copilot.png',
       screenshots: [
-        '/Images/Ai/Microsoft Copilot/1.png',
-        '/Images/Ai/Microsoft Copilot/2.png',
-        '/Images/Ai/Microsoft Copilot/3.png',
-        '/Images/Ai/Microsoft Copilot/4.png',
-        '/Images/Ai/Microsoft Copilot/5.png',
-        '/Images/Ai/Microsoft Copilot/6.png',
-        '/Images/Ai/Microsoft Copilot/7.png',
-        '/Images/Ai/Microsoft Copilot/8.png'
+        '/Images/Ai/Microsoft%20Copilot/1.png',
+        '/Images/Ai/Microsoft%20Copilot/2.png',
+        '/Images/Ai/Microsoft%20Copilot/3.png',
+        '/Images/Ai/Microsoft%20Copilot/4.png',
+        '/Images/Ai/Microsoft%20Copilot/5.png',
+        '/Images/Ai/Microsoft%20Copilot/6.png',
+        '/Images/Ai/Microsoft%20Copilot/7.png',
+        '/Images/Ai/Microsoft%20Copilot/8.png'
       ]
     },
     'perplexity-ai': {
@@ -288,16 +288,16 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       rating: '4.8',
       reviews: '800K reviews',
       downloads: '10M+',
-      iconUrl: '/Images/Ai/Perplexity AI/Perplexity AI.png',
+      iconUrl: '/Images/Ai/Perplexity%20AI/Perplexity%20AI.png',
       screenshots: [
-        '/Images/Ai/Perplexity AI/1.png',
-        '/Images/Ai/Perplexity AI/2.png',
-        '/Images/Ai/Perplexity AI/3.png',
-        '/Images/Ai/Perplexity AI/4.png',
-        '/Images/Ai/Perplexity AI/5.png',
-        '/Images/Ai/Perplexity AI/6.png',
-        '/Images/Ai/Perplexity AI/7.png',
-        '/Images/Ai/Perplexity AI/8.png'
+        '/Images/Ai/Perplexity%20AI/1.png',
+        '/Images/Ai/Perplexity%20AI/2.png',
+        '/Images/Ai/Perplexity%20AI/3.png',
+        '/Images/Ai/Perplexity%20AI/4.png',
+        '/Images/Ai/Perplexity%20AI/5.png',
+        '/Images/Ai/Perplexity%20AI/6.png',
+        '/Images/Ai/Perplexity%20AI/7.png',
+        '/Images/Ai/Perplexity%20AI/8.png'
       ]
     }
   };
