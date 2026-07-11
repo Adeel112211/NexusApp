@@ -1,12 +1,13 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
-import DownloadButton from '@/components/DownloadButton';
+import DownloadButton from '@/components/ui/DownloadButton';
 import { getDriveFileInfo } from '@/lib/drive';
-import ScreenshotsGallery from '@/components/ScreenshotsGallery';
-import AppsCarousel from '@/components/AppsCarousel';
-import AppCard from '@/components/AppCard';
+import ScreenshotsGallery from '@/components/ui/ScreenshotsGallery';
+import AppsCarousel from '@/components/ui/AppsCarousel';
+import AppCard from '@/components/ui/AppCard';
+import { playDataMap } from '@/data/playData';
 
 export default async function AppDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -44,7 +45,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       reviews: '12.8M reviews',
       downloads: '1B+',
       iconUrl: '/Images/Video%20%26%20Photo%20Editing/Capcut/Capcut.png',
-      googleDriveId: '1EgtZZA5JFYjFDsEeWSq21GNjjvTBtxe8',
+      googleDriveId: '1A_M6JFJ6eASPcsDhMEwEm_gb13ZL73el',
       screenshots: [
         '/Images/Video%20%26%20Photo%20Editing/Capcut/1.png',
         '/Images/Video%20%26%20Photo%20Editing/Capcut/2.png',
@@ -323,6 +324,19 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
   };
 
   let app = appDataMap[slug];
+  const playStoreInfo = playDataMap[slug];
+
+  if (app && playStoreInfo) {
+    app = {
+      ...app,
+      title: playStoreInfo.title,
+      developer: playStoreInfo.developer,
+      description: playStoreInfo.description,
+      rating: playStoreInfo.rating,
+      reviews: playStoreInfo.reviews,
+      downloads: playStoreInfo.downloads
+    };
+  }
 
   if (!app) {
     const fs = require('fs');
@@ -373,12 +387,12 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
     }
 
     app = {
-      title: foundApp || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-      developer: 'Unknown Developer',
-      description: 'Download the latest version for free. Get the best features, premium tools, and unrestricted access immediately.',
-      rating: (Math.random() * (4.9 - 4.2) + 4.2).toFixed(1),
-      reviews: '10K reviews',
-      downloads: '1M+',
+      title: playStoreInfo?.title || foundApp || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+      developer: playStoreInfo?.developer || 'Unknown Developer',
+      description: playStoreInfo?.description || 'Download the latest version for free. Get the best features, premium tools, and unrestricted access immediately.',
+      rating: playStoreInfo?.rating || (Math.random() * (4.9 - 4.2) + 4.2).toFixed(1),
+      reviews: playStoreInfo?.reviews || '10K reviews',
+      downloads: playStoreInfo?.downloads || '1M+',
       iconUrl: iconUrl,
       googleDriveId: {
         '8-ball-pool': '1-NfyjE93pZilJlB28lWqMUQlMMRXvLiJ',
@@ -390,7 +404,30 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
         'minecraft': '1sik4Sb97LPuRQ-TPnNZwI8T7NITJltH8',
         'hill-climb-racing': '1w1k7lOjgdHsVlMXiYueO59N2kNWIa5nF',
         'hill-climb-racing-2': '1U3qZ7NLbjUr3QaoS4-dU_hF3-Lpg7Zuv',
-        'roblox': '1TFC4Zla1fvyoyNxNlKOJBdEY8zLrnCmn'
+        'roblox': '1TFC4Zla1fvyoyNxNlKOJBdEY8zLrnCmn',
+        'amazon-music': '1Qc9FxP9sz9huskXdna3gUJayiIGE_7Ww',
+        'anghami': '1rfjw12uyiUl8TkEKrKUSjKi6QIG03lqU',
+        'gaana': '1Ajyjdp5RdhStC8g3Qh-EgHN-Q085RuRm',
+        'soundcloud': '1hEZc1kEV3AD0vYPafs1wiYgadYRyWZlq',
+        'spotify': '1pjt9_oIs2vLVHzWziH0vWsN9QdJNTSxE',
+        'youtube-music': '11-EJAkyZXBTmRj7jmYfzifQFf0XsTpoT',
+        'proton-vpn': '1nopFSHyjT_3EpUUmXRmU-VKP2Qo0rDKL',
+        'psiphon-vpn': '1poed-XLk2xk19ky5hJrHqVEYoCX4Ol9g',
+        'supervpn': '1p-6PhP17Xi3puMb3NuVQgUiCQoUhWH-L',
+        'thunder-vpn': '1VyCCHu6VOZNNclb04iTVWyVvZq53UCs0',
+        'turbo-vpn': '1Fa0Op_cwMhxSTvca4c0b0Kttnmq2l-ni',
+        'snapseed': '1Jrc3qb11uTUY275rJMnIyY9iv_0HjAHJ',
+        'deezer': '1Vxd_aq4lAvyD6Yn3P9AW1AU2U6AdfoP4',
+        'audiomack': '1x_0qWK6TSspjiXZDBgdJEbu-cBMHFaf2',
+        'stumble-guys': '1Q0aPcJwBFmRhZgklxKIZdNeCPHHcoFMw',
+        'subway-surfers': '1M1X7RBSgaLIt9WRycCiMzoA-Vvy3V0sD',
+        'chatgpt': '175H20oYttYKADOrqmQA9CIYygNMv-rRP',
+        'vpn-windscribe': '1hwRF0BBj7xMti1XtVe5qG1pgAC2XDavu',
+        'expressvpn': '19Tl4I_k9W6e3fuguLbBgJlAfU_VOEa8w',
+        'nordvpn': '1roTOre5gcENzu8nnQJE_p16OO2KoArpj',
+        'hide.me-vpn': '1djFMul3Pd5x7gRfzRVaUFSlUdNZ5mb7F',
+        'boomplay': '1cfxVUhK9FPhapbcKpbF9B3jkXIp4nDBS',
+        'napster': '1teRZ8KvK9m9H5xkAIdP3CBvUYp-yXS_D'
       }[slug as string] || undefined,
       screenshots: screenshots
     };
@@ -445,7 +482,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
               {/* Logo */}
               {app.iconUrl ? (
                 <div className="flex items-center justify-center overflow-hidden shadow-lg app-stats-logo">
-                  <Image src={app.iconUrl} alt="icon" width={84} height={84} className="object-cover w-full h-full" priority quality={100} />
+                  <Image src={app.iconUrl} alt="icon" width={84} height={84} className="object-cover w-full h-full" priority quality={100} unoptimized={true} />
                 </div>
               ) : (
                 <div className="bg-white/10 app-stats-logo" />
@@ -487,7 +524,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
             </div>
             
             {/* Interactive Install Button */}
-            <DownloadButton slug={slug} fileSize={fileSize} />
+            <DownloadButton slug={slug} fileSize={fileSize} googleDriveId={app.googleDriveId} />
           </div>
         </div>
         

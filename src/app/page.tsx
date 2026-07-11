@@ -1,22 +1,22 @@
 'use client';
 import { useState } from 'react';
-import Navbar    from '@/components/Navbar';
-import Hero      from '@/components/Hero';
-import AppCard   from '@/components/AppCard';
-import StatsRow  from '@/components/StatsRow';
-import CategoryCard from '@/components/CategoryCard';
-import ListRow   from '@/components/ListRow';
-import Footer    from '@/components/Footer';
-import AppsCarousel from '@/components/AppsCarousel';
-import SectionHead from '@/components/SectionHead';
-import { TRENDING_APPS, AI_TOOLS, GAMES, MUSIC, VPN } from '@/data/apps';
+import Navbar    from '@/components/layout/Navbar';
+import Hero      from '@/components/home/Hero';
+import AppCard   from '@/components/ui/AppCard';
+import StatsRow  from '@/components/home/StatsRow';
+import CategoryCard from '@/components/ui/CategoryCard';
+import ListRow   from '@/components/ui/ListRow';
+import Footer    from '@/components/layout/Footer';
+import AppsCarousel from '@/components/ui/AppsCarousel';
+import SectionHead from '@/components/ui/SectionHead';
+import { TRENDING_APPS, AI_TOOLS, GAMES, MUSIC, VPN, ANIME_AND_MANGA, MOVIE_AND_TV_APPS, SPORTS } from '@/data/apps';
 
 /* ─── Shared max-width wrapper ─────────────────────────── */
 const wrap: React.CSSProperties = { maxWidth: 1280, margin: '0 auto', padding: '0 2rem' };
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
-  const ALL_APPS = [...TRENDING_APPS, ...AI_TOOLS, ...GAMES, ...MUSIC, ...VPN];
+  const ALL_APPS = [...TRENDING_APPS, ...AI_TOOLS, ...GAMES, ...MUSIC, ...VPN, ...ANIME_AND_MANGA, ...MOVIE_AND_TV_APPS, ...SPORTS];
   
   const filteredApps = ALL_APPS.filter(app => 
     app.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -90,6 +90,30 @@ export default function Home() {
             <SectionHead title="VPN's" />
             <AppsCarousel>
               {VPN.map(app => <AppCard key={app.title} {...app} />)}
+            </AppsCarousel>
+          </section>
+
+          {/* ── Anime & Manga ───────────────────────────────── */}
+          <section className="container animate-fade-up delay-600" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+            <SectionHead title="ANIME & MANGA" />
+            <AppsCarousel>
+              {ANIME_AND_MANGA.map(app => <AppCard key={app.title} {...app} />)}
+            </AppsCarousel>
+          </section>
+
+          {/* ── Movie & TV Apps ─────────────────────────────── */}
+          <section className="container animate-fade-up delay-700" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+            <SectionHead title="MOVIE & TV APPS" />
+            <AppsCarousel>
+              {MOVIE_AND_TV_APPS.map(app => <AppCard key={app.title} {...app} />)}
+            </AppsCarousel>
+          </section>
+
+          {/* ── Sports ──────────────────────────────────────── */}
+          <section className="container animate-fade-up delay-800" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+            <SectionHead title="SPORTS" />
+            <AppsCarousel>
+              {SPORTS.map(app => <AppCard key={app.title} {...app} />)}
             </AppsCarousel>
           </section>
 

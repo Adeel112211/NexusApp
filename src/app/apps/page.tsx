@@ -1,10 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Navbar    from '@/components/Navbar';
-import AppCard   from '@/components/AppCard';
-import Footer    from '@/components/Footer';
-import SectionHead from '@/components/SectionHead';
-import { TRENDING_APPS, AI_TOOLS, MUSIC, VPN } from '@/data/apps';
+import Navbar    from '@/components/layout/Navbar';
+import AppCard   from '@/components/ui/AppCard';
+import Footer    from '@/components/layout/Footer';
+import SectionHead from '@/components/ui/SectionHead';
+import { TRENDING_APPS, AI_TOOLS, GAMES, MUSIC, VPN, ANIME_AND_MANGA, MOVIE_AND_TV_APPS, SPORTS } from '@/data/apps';
 
 export default function AppsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +18,7 @@ export default function AppsPage() {
     }
   }, []);
 
-  const ALL_APPS = [...TRENDING_APPS, ...AI_TOOLS, ...MUSIC, ...VPN];
+  const ALL_APPS = [...TRENDING_APPS, ...AI_TOOLS, ...GAMES, ...MUSIC, ...VPN, ...ANIME_AND_MANGA, ...MOVIE_AND_TV_APPS, ...SPORTS];
   
   const filteredApps = ALL_APPS.filter(app => 
     app.title.toLowerCase().includes(searchQuery.toLowerCase())

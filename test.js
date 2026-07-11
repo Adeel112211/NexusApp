@@ -1,0 +1,1 @@
+const gplay = require('google-play-scraper'); async function run() { try { const res = await gplay.search({ term: 'Capcut', num: 1 }); console.log(res); } catch(e) { console.error('ERROR:', e); } } run();

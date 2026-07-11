@@ -1,0 +1,1 @@
+const gplay = require('google-play-scraper').default || require('google-play-scraper'); async function test() { try { const res = await gplay.app({ appId: 'com.lemon.lvoverseas', country: 'pk' }); console.log('PK Reviews:', res.reviews, 'Rating:', res.scoreText, 'Installs:', res.installs); } catch(e) { console.error(e); } } test();
