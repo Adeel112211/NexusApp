@@ -4,10 +4,13 @@ import Navbar    from '@/components/layout/Navbar';
 import AppCard   from '@/components/ui/AppCard';
 import Footer    from '@/components/layout/Footer';
 import SectionHead from '@/components/ui/SectionHead';
-import { TRENDING_APPS, AI_TOOLS, GAMES, MUSIC, VPN, ANIME_AND_MANGA, MOVIE_AND_TV_APPS, SPORTS } from '@/data/apps';
+import Pagination from '@/components/ui/Pagination';
+import { TRENDING_APPS, AI_TOOLS, MUSIC, VPN, ANIME_AND_MANGA, MOVIE_AND_TV_APPS, SPORTS, VIDEO_PLAYERS, FILE_MANAGERS } from '@/data/apps';
 
 export default function AppsPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   useEffect(() => {
     // Only run on the client after mount to avoid hydration mismatch
@@ -15,14 +18,19 @@ export default function AppsPage() {
     const q = params.get('q');
     if (q) {
       setSearchQuery(q);
+      setCurrentPage(1);
     }
   }, []);
 
-  const ALL_APPS = [...TRENDING_APPS, ...AI_TOOLS, ...GAMES, ...MUSIC, ...VPN, ...ANIME_AND_MANGA, ...MOVIE_AND_TV_APPS, ...SPORTS];
+  const ALL_APPS = [...TRENDING_APPS, ...AI_TOOLS, ...MUSIC, ...VPN, ...ANIME_AND_MANGA, ...MOVIE_AND_TV_APPS, ...SPORTS, ...VIDEO_PLAYERS, ...FILE_MANAGERS];
   
   const filteredApps = ALL_APPS.filter(app => 
     app.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const totalPages = Math.ceil(filteredApps.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentApps = filteredApps.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <main>
@@ -42,7 +50,10 @@ export default function AppsPage() {
             type="text" 
             placeholder="Search apps..." 
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             style={{ 
               width: '100%', 
               padding: '14px 24px', 
@@ -68,17 +79,30 @@ export default function AppsPage() {
       </div>
 
       {/* ── All Apps Grid ───────────────────────────────────────── */}
-      <div className="container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6" style={{ marginBottom: '6rem' }}>
-        {filteredApps.length > 0 ? (
-          filteredApps.map((app, index) => (
-            <div key={app.title} className={`animate-fade-up delay-${(index % 5) * 100}`}>
-              <AppCard {...app} />
+      <div className="container" style={{ marginBottom: '6rem' }}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
+          {currentApps.length > 0 ? (
+            currentApps.map((app, index) => (
+              <div key={app.title} className={`animate-fade-up delay-${(index % 5) * 100}`}>
+                <AppCard {...app} />
+              </div>
+            ))
+          ) : (
+            <div style={{ color: '#9CA3AF', padding: '2rem 0', fontSize: '1.1rem', gridColumn: '1 / -1' }}>
+              No apps found matching "{searchQuery}"
             </div>
-          ))
-        ) : (
-          <div style={{ color: '#9CA3AF', padding: '2rem 0', fontSize: '1.1rem', gridColumn: '1 / -1' }}>
-            No apps found matching "{searchQuery}"
-          </div>
+          )}
+        </div>
+        
+        {totalPages > 1 && (
+          <Pagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            onPageChange={(page) => {
+              setCurrentPage(page);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }} 
+          />
         )}
       </div>
 

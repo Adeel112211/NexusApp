@@ -52,6 +52,32 @@ export default function AppCard({ title, rating, iconUrl, priority = false, zoom
             <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg,#1a1f2e,#0b0c10)' }} />
           )}
         </div>
+        
+        {/* MOD APK Badge */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          background: 'linear-gradient(135deg, #FF0055 0%, #B3003B 100%)',
+          color: '#ffffff',
+          fontSize: '0.65rem',
+          fontWeight: 900,
+          letterSpacing: '0.1em',
+          padding: '6px 14px',
+          borderBottomLeftRadius: '16px',
+          zIndex: 10,
+          boxShadow: '-4px 4px 15px rgba(255, 0, 85, 0.4)',
+          textTransform: 'uppercase',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '4px'
+        }}>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+          </svg>
+          MOD APK
+        </div>
       </div>
 
       {/* Title + Rating */}

@@ -124,3 +124,30 @@ export const SPORTS = [
   { title: "SofaScore", rating: 4.3, iconUrl: "/Images/Sports/SofaScore/SofaScore.webp" },
   { title: "Tapmad", rating: 4.6, iconUrl: "/Images/Sports/Tapmad/tapmad.webp" }
 ];
+
+export const VIDEO_PLAYERS = [
+  { title: "KMPlayer", rating: 4.5, iconUrl: "/Images/Video%20Players/KMPlayer/KMPlayer.webp" },
+  { title: "Kodi", rating: 4.2, iconUrl: "/Images/Video%20Players/Kodi/Kodi.webp" },
+  { title: "MX Player", rating: 4.6, iconUrl: "/Images/Video%20Players/MX%20Player/MX%20Player.webp" },
+  { title: "Nova Video Player", rating: 4.3, iconUrl: "/Images/Video%20Players/Nova%20Video%20Player/Nova%20Video%20Player.webp" },
+  { title: "nPlayer", rating: 4.4, iconUrl: "/Images/Video%20Players/nPlayer/nPlayer.webp" },
+  { title: "PLAYit", rating: 4.5, iconUrl: "/Images/Video%20Players/PLAYit/PLAYit.webp" },
+  { title: "VLC Media Player", rating: 4.6, iconUrl: "/Images/Video%20Players/VLC%20Media%20Player/VLC%20Media%20Player.webp" },
+  { title: "Web Video Cast", rating: 4.7, iconUrl: "/Images/Video%20Players/Web%20Video%20Cast/Web%20Video%20Cast.webp" },
+  { title: "XPlayer", rating: 4.8, iconUrl: "/Images/Video%20Players/XPlayer/XPlayer.webp" }
+];
+
+export const FILE_MANAGERS = [
+  { title: "ASTRO File Manager", rating: 4.4, iconUrl: "/Images/File%20Manager/ASTRO%20File%20Manager/ASTRO%20File%20Manager.webp" },
+  { title: "ES File Explorer", rating: 4.3, iconUrl: "/Images/File%20Manager/ES%20File%20Explorer/ES%20File%20Explorer.webp" },
+  { title: "File Commander", rating: 4.5, iconUrl: "/Images/File%20Manager/File%20Commander/File%20Commander.webp" },
+  { title: "File Manager Plus", rating: 4.6, iconUrl: "/Images/File%20Manager/File%20Manager%20Plus/File%20Manager%20Plus.webp" },
+  { title: "FX File Explorer", rating: 4.4, iconUrl: "/Images/File%20Manager/FX%20File%20Explorer/FX%20File%20Explorer.webp" },
+  { title: "MiXplorer", rating: 4.7, iconUrl: "/Images/File%20Manager/MiXplorer/MiXplorer.webp" },
+  { title: "MT Manager", rating: 4.6, iconUrl: "/Images/File%20Manager/MT%20Manager/MT%20Manager.webp" },
+  { title: "Root Explorer", rating: 4.5, iconUrl: "/Images/File%20Manager/Root%20Explorer/Root%20Explorer.webp" },
+  { title: "RS File Manager", rating: 4.4, iconUrl: "/Images/File%20Manager/RS%20File%20Manager/RS%20File%20Manager.webp" },
+  { title: "Solid Explorer", rating: 4.6, iconUrl: "/Images/File%20Manager/Solid%20Explorer/Solid%20Explorer.webp" },
+  { title: "X-plore File Manager", rating: 4.7, iconUrl: "/Images/File%20Manager/X-plore%20File%20Manager/X-plore%20File%20Manager.webp" },
+  { title: "ZArchiver", rating: 4.8, iconUrl: "/Images/File%20Manager/ZArchiver/ZArchiver.webp" }
+];

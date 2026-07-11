@@ -3,14 +3,21 @@ import { useState } from 'react';
 import Navbar    from '@/components/layout/Navbar';
 import AppCard   from '@/components/ui/AppCard';
 import Footer    from '@/components/layout/Footer';
+import Pagination from '@/components/ui/Pagination';
 import { GAMES } from '@/data/apps';
 
 export default function GamesPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+
   const filteredGames = GAMES.filter(game => 
     game.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const totalPages = Math.ceil(filteredGames.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentGames = filteredGames.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <main>
@@ -30,7 +37,10 @@ export default function GamesPage() {
             type="text" 
             placeholder="Search games..." 
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1);
+            }}
             style={{ 
               width: '100%', 
               padding: '14px 24px', 
@@ -56,8 +66,8 @@ export default function GamesPage() {
 
         {/* ── Games Grid ───────────────────────────────────────── */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6" style={{ marginBottom: '6rem' }}>
-          {filteredGames.length > 0 ? (
-            filteredGames.map((game, index) => (
+          {currentGames.length > 0 ? (
+            currentGames.map((game, index) => (
               <div key={game.title} className={`animate-fade-up delay-${(index % 5) * 100}`}>
                 <AppCard {...game} priority={index < 5} />
               </div>
@@ -68,6 +78,17 @@ export default function GamesPage() {
             </div>
           )}
         </div>
+        
+        {totalPages > 1 && (
+          <Pagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            onPageChange={(page) => {
+              setCurrentPage(page);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }} 
+          />
+        )}
       </div>
 
       <Footer />

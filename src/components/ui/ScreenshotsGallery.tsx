@@ -84,7 +84,7 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
     );
   }
 
-  const widthClass = layout === 'single' ? 'w-full' : 'w-[calc(33.333%-11px)]';
+  const widthClass = layout === 'single' ? 'w-full' : 'w-[55%] sm:w-[45%] md:w-[40%] lg:w-[55%] xl:w-[45%]';
 
   return (
     <div className="w-full lg:flex-1 lg:min-w-[500px] relative flex flex-col">
@@ -118,13 +118,13 @@ export default function ScreenshotsGallery({ screenshots, title }: ScreenshotsGa
 
           <div 
             ref={containerRef}
-            className="w-full flex gap-4 overflow-x-auto pb-4 touch-pan-x scroll-smooth scrollbar-hide snap-x items-center"
+            className="w-full flex gap-2 overflow-x-auto pb-4 touch-pan-x scroll-smooth scrollbar-hide snap-x items-center"
           >
             {screenshots.map((src: string, i: number) => (
               <div 
                 key={i} 
                 className={`flex-shrink-0 ${widthClass} rounded-2xl overflow-hidden shadow-screenshot relative snap-center`}
-                style={{ aspectRatio: layout === 'single' ? '16/9' : '9/16', maxHeight: '500px' }}
+                style={{ aspectRatio: layout === 'single' ? '16/9' : '9/16', maxHeight: '650px' }}
               >
                 <Image 
                   src={src} 

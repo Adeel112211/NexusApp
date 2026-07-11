@@ -441,7 +441,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
     <main className="min-h-screen flex flex-col">
       <Navbar />
         
-      <div className="container animate-fade-up flex flex-wrap gap-8 items-center justify-center" style={{ paddingTop: '32px', paddingBottom: '48px' }}>
+      <div className="container animate-fade-up flex flex-wrap gap-12 lg:gap-24 items-center justify-between" style={{ paddingTop: '32px', paddingBottom: '48px' }}>
         {/* Left Side: App Info */}
         <div className="w-full md:flex-1 flex flex-col pt-4" style={{ minWidth: '0', maxWidth: '460px' }}>
           <h1 className="text-3xl md:text-4xl font-semibold text-white mb-1 leading-tight">
@@ -466,65 +466,99 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
               .app-stats-row { flex-wrap: nowrap; margin-bottom: 32px; }
               .app-stats-logo { width: 84px; height: 84px; margin-right: 24px; border-radius: 20px; flex-shrink: 0; }
               .app-stats-val { font-size: 18px; }
-              .app-stats-lbl { font-size: 13px; }
-              .app-stats-div { margin: 0 24px; height: 32px; width: 1px; flex-shrink: 0; background-color: rgba(255,255,255,0.1); }
+              .app-mod-badge {
+                position: absolute;
+                bottom: -2px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #FF0055 0%, #B3003B 100%);
+                color: #ffffff;
+                font-size: 0.5rem;
+                font-weight: 900;
+                letter-spacing: 0.05em;
+                padding: 2px 8px;
+                border-radius: 8px 8px 0 0;
+                z-index: 10;
+                box-shadow: 0 -2px 10px rgba(255, 0, 85, 0.4);
+                text-transform: uppercase;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2px;
+                white-space: nowrap;
+              }
+              .app-mod-badge-icon { width: 8px; height: 8px; }
               
               @media (max-width: 500px) {
-                .app-stats-logo { width: 48px; height: 48px; margin-right: 12px; border-radius: 12px; }
+                .app-stats-logo { width: 56px; height: 56px; margin-right: 12px; border-radius: 12px; }
                 .app-stats-val { font-size: 13px; }
                 .app-stats-lbl { font-size: 10px; }
                 .app-stats-div { margin: 0 12px; height: 24px; }
+                .app-mod-badge {
+                  font-size: 0.4rem;
+                  padding: 1px 4px;
+                  border-radius: 6px 6px 0 0;
+                }
+                .app-mod-badge-icon { width: 6px; height: 6px; }
               }
             `}</style>
             
             {/* Stats Row */}
-            <div className="flex items-center pb-2 w-full justify-between sm:justify-start app-stats-row">
+            <div className="flex items-center pb-2 w-full" style={{ marginBottom: '2.5rem' }}>
               {/* Logo */}
               {app.iconUrl ? (
-                <div className="flex items-center justify-center overflow-hidden shadow-lg app-stats-logo">
+                <div className="flex items-center justify-center overflow-hidden shadow-lg app-stats-logo relative">
                   <Image src={app.iconUrl} alt="icon" width={84} height={84} className="object-cover w-full h-full" priority quality={100} unoptimized={true} />
+                  <div className="app-mod-badge">
+                    <svg className="app-mod-badge-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                    MOD APK
+                  </div>
                 </div>
               ) : (
-                <div className="bg-white/10 app-stats-logo" />
+                <div className="bg-white/10 app-stats-logo relative" />
               )}
               
-              {/* Rating */}
-              <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
-                <div className="font-bold text-white flex items-center app-stats-val" style={{ whiteSpace: 'nowrap', gap: '4px' }}>
-                  {app.rating}
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+              {/* Stats Container */}
+              <div className="flex items-center justify-between flex-1 sm:flex-none sm:gap-8 min-w-0">
+                {/* Rating */}
+                <div className="flex flex-col items-center justify-center flex-shrink-0">
+                  <div className="font-bold text-white flex items-center app-stats-val" style={{ whiteSpace: 'nowrap', gap: '4px' }}>
+                    {app.rating}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                  </div>
+                  <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '4px' }}>{app.reviews}</div>
                 </div>
-                <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>{app.reviews}</div>
+                
+                {/* Divider */}
+                <div className="w-[1px] h-8 bg-white/10 flex-shrink-0 mx-2 sm:mx-0" />
+                
+                {/* Downloads */}
+                <div className="flex flex-col items-center justify-center flex-shrink-0">
+                  <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{app.downloads}</div>
+                  <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '4px' }}>Downloads</div>
+                </div>
+                
+                {/* Version */}
+                {fileVersion && (
+                  <>
+                    {/* Divider */}
+                    <div className="w-[1px] h-8 bg-white/10 flex-shrink-0 mx-2 sm:mx-0" />
+                    
+                    <div className="flex flex-col items-center justify-center flex-shrink-0">
+                      <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{fileVersion}</div>
+                      <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '4px' }}>Version</div>
+                    </div>
+                  </>
+                )}
               </div>
-              
-              {/* Divider */}
-              <div className="flex items-center justify-center">
-                <div className="app-stats-div" />
-              </div>
-              
-              {/* Downloads */}
-              <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
-                <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{app.downloads}</div>
-                <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Downloads</div>
-              </div>
-              
-              {/* Version */}
-              {fileVersion && (
-                <>
-                  <div className="flex items-center justify-center">
-                    <div className="app-stats-div" />
-                  </div>
-                  
-                  <div className="flex flex-col justify-center" style={{ flexShrink: 0 }}>
-                    <div className="font-bold text-white app-stats-val" style={{ whiteSpace: 'nowrap' }}>{fileVersion}</div>
-                    <div className="text-text-muted app-stats-lbl" style={{ whiteSpace: 'nowrap', marginTop: '2px' }}>Version</div>
-                  </div>
-                </>
-              )}
             </div>
             
             {/* Interactive Install Button */}
-            <DownloadButton slug={slug} fileSize={fileSize} googleDriveId={app.googleDriveId} />
+            <div style={{ marginTop: '1rem' }}>
+              <DownloadButton slug={slug} fileSize={fileSize} googleDriveId={app.googleDriveId} />
+            </div>
           </div>
         </div>
         
@@ -533,7 +567,7 @@ export default async function AppDetailsPage({ params }: { params: Promise<{ slu
       </div>
       
       {/* AI Tools Section */}
-      <section className="container animate-fade-up mt-16 pt-8 border-t border-white/5">
+      <section className="container animate-fade-up mt-16 pt-8 border-t border-white/5 mb-16">
         <h2 className="text-lg font-extrabold uppercase tracking-wider text-white mb-6">AI TOOLS</h2>
         <AppsCarousel>
           <AppCard title="ChatGPT" rating={4.8} iconUrl="/Images/Ai/ChatGPT/ChatGPT.png" isFree={true} priority={true} />

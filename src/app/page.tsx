@@ -9,7 +9,8 @@ import ListRow   from '@/components/ui/ListRow';
 import Footer    from '@/components/layout/Footer';
 import AppsCarousel from '@/components/ui/AppsCarousel';
 import SectionHead from '@/components/ui/SectionHead';
-import { TRENDING_APPS, AI_TOOLS, GAMES, MUSIC, VPN, ANIME_AND_MANGA, MOVIE_AND_TV_APPS, SPORTS } from '@/data/apps';
+import ViewAllCard from '@/components/ui/ViewAllCard';
+import { TRENDING_APPS, AI_TOOLS, GAMES, MUSIC, VPN, ANIME_AND_MANGA, MOVIE_AND_TV_APPS, SPORTS, VIDEO_PLAYERS, FILE_MANAGERS } from '@/data/apps';
 
 /* ─── Shared max-width wrapper ─────────────────────────── */
 const wrap: React.CSSProperties = { maxWidth: 1280, margin: '0 auto', padding: '0 2rem' };
@@ -52,7 +53,8 @@ export default function Home() {
           <section className="container animate-fade-up" style={{ marginTop: '3.5rem', marginBottom: '4rem' }}>
             <SectionHead title="VIDEO & PHOTO EDITORS" />
             <AppsCarousel>
-              {TRENDING_APPS.map(app => <AppCard key={app.title} {...app} />)}
+              {TRENDING_APPS.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {TRENDING_APPS.length > 15 && <ViewAllCard href="/apps" title="View All Apps" />}
             </AppsCarousel>
           </section>
 
@@ -65,7 +67,8 @@ export default function Home() {
           <section className="container animate-fade-up delay-200" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="AI TOOLS" />
             <AppsCarousel>
-              {AI_TOOLS.map(app => <AppCard key={app.title} {...app} />)}
+              {AI_TOOLS.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {AI_TOOLS.length > 15 && <ViewAllCard href="/apps" title="View All AI Tools" />}
             </AppsCarousel>
           </section>
 
@@ -73,7 +76,8 @@ export default function Home() {
           <section className="container animate-fade-up delay-300" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="GAMES" />
             <AppsCarousel>
-              {GAMES.map(game => <AppCard key={game.title} {...game} zoomIcon />)}
+              {GAMES.slice(0, 15).map(game => <AppCard key={game.title} {...game} zoomIcon />)}
+              {GAMES.length > 15 && <ViewAllCard href="/games" title="View All Games" />}
             </AppsCarousel>
           </section>
 
@@ -81,7 +85,8 @@ export default function Home() {
           <section className="container animate-fade-up delay-400" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="MUSIC & AUDIO" />
             <AppsCarousel>
-              {MUSIC.map(app => <AppCard key={app.title} {...app} />)}
+              {MUSIC.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {MUSIC.length > 15 && <ViewAllCard href="/apps" title="View All Music" />}
             </AppsCarousel>
           </section>
 
@@ -89,7 +94,8 @@ export default function Home() {
           <section className="container animate-fade-up delay-500" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="VPN's" />
             <AppsCarousel>
-              {VPN.map(app => <AppCard key={app.title} {...app} />)}
+              {VPN.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {VPN.length > 15 && <ViewAllCard href="/apps" title="View All VPNs" />}
             </AppsCarousel>
           </section>
 
@@ -97,7 +103,8 @@ export default function Home() {
           <section className="container animate-fade-up delay-600" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="ANIME & MANGA" />
             <AppsCarousel>
-              {ANIME_AND_MANGA.map(app => <AppCard key={app.title} {...app} />)}
+              {ANIME_AND_MANGA.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {ANIME_AND_MANGA.length > 15 && <ViewAllCard href="/apps" title="View All Anime" />}
             </AppsCarousel>
           </section>
 
@@ -105,7 +112,8 @@ export default function Home() {
           <section className="container animate-fade-up delay-700" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="MOVIE & TV APPS" />
             <AppsCarousel>
-              {MOVIE_AND_TV_APPS.map(app => <AppCard key={app.title} {...app} />)}
+              {MOVIE_AND_TV_APPS.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {MOVIE_AND_TV_APPS.length > 15 && <ViewAllCard href="/apps" title="View All Movies" />}
             </AppsCarousel>
           </section>
 
@@ -113,7 +121,26 @@ export default function Home() {
           <section className="container animate-fade-up delay-800" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
             <SectionHead title="SPORTS" />
             <AppsCarousel>
-              {SPORTS.map(app => <AppCard key={app.title} {...app} />)}
+              {SPORTS.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {SPORTS.length > 15 && <ViewAllCard href="/apps" title="View All Sports" />}
+            </AppsCarousel>
+          </section>
+
+          {/* ── Video Players ───────────────────────────────── */}
+          <section className="container animate-fade-up delay-400" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+            <SectionHead title="VIDEO PLAYERS" />
+            <AppsCarousel>
+              {VIDEO_PLAYERS.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {VIDEO_PLAYERS.length > 15 && <ViewAllCard href="/apps" title="View All Video Players" />}
+            </AppsCarousel>
+          </section>
+
+          {/* ── File Managers ───────────────────────────────── */}
+          <section className="container animate-fade-up delay-500" style={{ marginTop: '3.5rem', marginBottom: '3.5rem' }}>
+            <SectionHead title="FILE MANAGERS" />
+            <AppsCarousel>
+              {FILE_MANAGERS.slice(0, 15).map(app => <AppCard key={app.title} {...app} />)}
+              {FILE_MANAGERS.length > 15 && <ViewAllCard href="/apps" title="View All File Managers" />}
             </AppsCarousel>
           </section>
 
